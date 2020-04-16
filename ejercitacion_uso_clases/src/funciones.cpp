@@ -5,6 +5,14 @@
 
 bool masDeUnaAparicion(vector<int> vector, int i);
 
+bool conjuntoEqual(set<LU> vector, set<LU> set);
+
+bool duplicated(vector<set<LU>> vector, set<LU> set);
+
+bool seRepite(vector<set<LU>> vector);
+
+bool pertenece(set<LU> set, LU lu);
+
 using namespace std;
 
 // Ejercicio 1
@@ -148,10 +156,84 @@ vector<char> traducir(vector<pair<char, char>> tr, vector<char> str) {
 
 // Ejercicio 10
 bool integrantes_repetidos(vector<Mail> s) {
-    return true;
+    vector<set<LU>> conjuntoDeLUs;
+    for (Mail mail: s) {
+        set<LU> LUs = mail.libretas();
+        if (!duplicated(conjuntoDeLUs, LUs)) {
+            conjuntoDeLUs.push_back(LUs);
+        }
+    }
+
+
+    return seRepite(conjuntoDeLUs);
+}
+
+bool seRepite(vector<set<LU>> s) {
+    for (set<LU> i: s) {
+        for (LU lu: i) {
+            int apariciones = 0;
+            for (set<LU> j: s) {
+                if(pertenece(j, lu)) {
+                    apariciones++;
+                }
+            }
+            if(apariciones > 1) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool pertenece(set<LU> lus, LU lu) {
+    for (LU j: lus) {
+        if (lu.anio() == j.anio() && lu.numero() == j.numero()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool duplicated(vector<set<LU>> conjunto_lus, set<LU> lus) {
+    for(set<LU> i: conjunto_lus) {
+        if (conjuntoEqual(i, lus)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool conjuntoEqual(set<LU> lus1, set<LU> lus2) {
+    bool equal = true;
+    for (LU i: lus1) {
+        if(!pertenece(lus2, i)) {
+            equal = false;
+        }
+    }
+    for (LU i: lus2) {
+        if(!pertenece(lus1, i)) {
+            equal = false;
+        }
+    }
+    return equal;
 }
 
 // Ejercicio 11
 map<set<LU>, Mail> entregas_finales(vector<Mail> s) {
-  return map<set<LU>, Mail>();
+    map<set<LU>, Mail> entregas_finales;
+    for(Mail mail: s) {
+        set<LU> libretas = mail.libretas();
+        bool adjunto = mail.adjunto();
+        bool aparece = false;
+        for (pair<set<LU>, Mail> pair: entregas_finales) {
+            if(!conjuntoEqual(mail.libretas(), pair.first) && adjunto) {
+                entregas_finales[mail.libretas()] = mail;
+                aparece = true;
+            }
+        }
+        if(!aparece && adjunto) {
+            entregas_finales[mail.libretas()] = mail;
+        }
+    }
+    return entregas_finales;
 }
