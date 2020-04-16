@@ -43,10 +43,10 @@ RM = /home/martin/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.6817.32/bin
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases"
+CMAKE_SOURCE_DIR = /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug"
+CMAKE_BINARY_DIR = /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/gtest_main.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/gtest_main.dir/flags.make
 
 CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.o: CMakeFiles/gtest_main.dir/flags.make
 CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.o: ../tests/gtest-1.8.1/gtest_main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.o -c "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/gtest-1.8.1/gtest_main.cc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.o -c /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/gtest-1.8.1/gtest_main.cc
 
 CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/gtest-1.8.1/gtest_main.cc" > CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/gtest-1.8.1/gtest_main.cc > CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.i
 
 CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/gtest-1.8.1/gtest_main.cc" -o CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/gtest-1.8.1/gtest_main.cc -o CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.s
 
 # Object files for target gtest_main
 gtest_main_OBJECTS = \
@@ -80,7 +80,7 @@ gtest_main_EXTERNAL_OBJECTS =
 libgtest_main.a: CMakeFiles/gtest_main.dir/tests/gtest-1.8.1/gtest_main.cc.o
 libgtest_main.a: CMakeFiles/gtest_main.dir/build.make
 libgtest_main.a: CMakeFiles/gtest_main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libgtest_main.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libgtest_main.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/gtest_main.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gtest_main.dir/link.txt --verbose=$(VERBOSE)
 
@@ -94,6 +94,6 @@ CMakeFiles/gtest_main.dir/clean:
 .PHONY : CMakeFiles/gtest_main.dir/clean
 
 CMakeFiles/gtest_main.dir/depend:
-	cd "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/gtest_main.dir/DependInfo.cmake" --color=$(COLOR)
+	cd /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/gtest_main.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/gtest_main.dir/depend
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases
+# Install script for directory: /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -6,5 +6,5 @@ CXX_FLAGS =  -pthread -std=gnu++11 -ggdb3 -g -g   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/src" -I"/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests" 
+CXX_INCLUDES = -I/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/src -I/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests 
 

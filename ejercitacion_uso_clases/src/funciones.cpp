@@ -3,6 +3,8 @@
 #include <algorithm>
 #include "algobot.h"
 
+bool masDeUnaAparicion(vector<int> vector, int i);
+
 using namespace std;
 
 // Ejercicio 1
@@ -76,22 +78,72 @@ map<int, int> contar_apariciones(vector<int> s) {
 
 // Ejercicio 6
 vector<int> filtrar_repetidos(vector<int> s) {
-    return vector<int>();
+    vector<int> res;
+    for(int i: s) {
+        if(!masDeUnaAparicion(s, i)) {
+            res.push_back(i);
+        }
+    }
+    return res;
+}
+
+bool masDeUnaAparicion(vector<int> s, int i) {
+    int counter = 0;
+    for(int j: s) {
+        if (j == i) {
+            counter++;
+        }
+    }
+    return counter > 1;
 }
 
 // Ejercicio 7
 set<int> interseccion(set<int> a, set<int> b) {
-    return set<int>();
+    set<int> res;
+    for (int i: a) {
+        if(a.count(i) == 1 && b.count(i) == 1) {
+            res.insert(i);
+        }
+    }
+    return res;
 }
 
 // Ejercicio 8
 map<int, set<int>> agrupar_por_unidades(vector<int> s) {
-    return map<int, set<int>>();
+    map<int, set<int>> res;
+    for (int number: s) {
+        bool appear = false;
+        for (pair<int, set<int>> pair: res) {
+            if (pair.first == number % 10) {
+                res[pair.first].insert(number);
+                appear = true;
+            }
+        }
+        if(!appear) {
+            set<int> newMap;
+            newMap.insert(number);
+            res[number % 10] = (newMap);
+        }
+    }
+    return res;
 }
 
 // Ejercicio 9
 vector<char> traducir(vector<pair<char, char>> tr, vector<char> str) {
-    return vector<char>();
+    vector<char> res;
+    for (char letra: str) {
+        bool appear = false;
+        for (pair<char, char> charPair: tr) {
+            if(charPair.first == letra) {
+                res.push_back(charPair.second);
+                appear = true;
+            }
+        }
+        if (!appear) {
+            res.push_back(letra);
+        }
+    }
+    return res;
 }
 
 // Ejercicio 10

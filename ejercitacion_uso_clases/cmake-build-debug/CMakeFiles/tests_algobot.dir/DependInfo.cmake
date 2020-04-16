@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/src/algobot.cpp" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/tests_algobot.dir/src/algobot.cpp.o"
-  "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/tests_algobot.cpp" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.o"
+  "/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/src/algobot.cpp" "/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/tests_algobot.dir/src/algobot.cpp.o"
+  "/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/tests_algobot.cpp" "/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,8 +17,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/gtest.dir/DependInfo.cmake"
-  "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/gtest_main.dir/DependInfo.cmake"
+  "/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/gtest.dir/DependInfo.cmake"
+  "/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/gtest_main.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

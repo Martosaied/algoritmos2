@@ -43,10 +43,10 @@ RM = /home/martin/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.6817.32/bin
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases"
+CMAKE_SOURCE_DIR = /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug"
+CMAKE_BINARY_DIR = /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/tests_algobot.dir/depend.make
@@ -59,29 +59,29 @@ include CMakeFiles/tests_algobot.dir/flags.make
 
 CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.o: CMakeFiles/tests_algobot.dir/flags.make
 CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.o: ../tests/tests_algobot.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.o -c "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/tests_algobot.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.o -c /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/tests_algobot.cpp
 
 CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/tests_algobot.cpp" > CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/tests_algobot.cpp > CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.i
 
 CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/tests_algobot.cpp" -o CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/tests_algobot.cpp -o CMakeFiles/tests_algobot.dir/tests/tests_algobot.cpp.s
 
 CMakeFiles/tests_algobot.dir/src/algobot.cpp.o: CMakeFiles/tests_algobot.dir/flags.make
 CMakeFiles/tests_algobot.dir/src/algobot.cpp.o: ../src/algobot.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/tests_algobot.dir/src/algobot.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tests_algobot.dir/src/algobot.cpp.o -c "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/src/algobot.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/tests_algobot.dir/src/algobot.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/tests_algobot.dir/src/algobot.cpp.o -c /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/src/algobot.cpp
 
 CMakeFiles/tests_algobot.dir/src/algobot.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests_algobot.dir/src/algobot.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/src/algobot.cpp" > CMakeFiles/tests_algobot.dir/src/algobot.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/src/algobot.cpp > CMakeFiles/tests_algobot.dir/src/algobot.cpp.i
 
 CMakeFiles/tests_algobot.dir/src/algobot.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests_algobot.dir/src/algobot.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/src/algobot.cpp" -o CMakeFiles/tests_algobot.dir/src/algobot.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/src/algobot.cpp -o CMakeFiles/tests_algobot.dir/src/algobot.cpp.s
 
 # Object files for target tests_algobot
 tests_algobot_OBJECTS = \
@@ -97,7 +97,7 @@ tests_algobot: CMakeFiles/tests_algobot.dir/build.make
 tests_algobot: libgtest.a
 tests_algobot: libgtest_main.a
 tests_algobot: CMakeFiles/tests_algobot.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable tests_algobot"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable tests_algobot"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tests_algobot.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -110,6 +110,6 @@ CMakeFiles/tests_algobot.dir/clean:
 .PHONY : CMakeFiles/tests_algobot.dir/clean
 
 CMakeFiles/tests_algobot.dir/depend:
-	cd "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug" "/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/tests_algobot.dir/DependInfo.cmake" --color=$(COLOR)
+	cd /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug /home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/cmake-build-debug/CMakeFiles/tests_algobot.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/tests_algobot.dir/depend
 

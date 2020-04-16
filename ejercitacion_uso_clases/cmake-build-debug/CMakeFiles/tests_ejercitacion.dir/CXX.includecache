@@ -24,7 +24,7 @@ algorithm
 algobot.h
 ../src/algobot.h
 
-/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/gtest-1.8.1/gtest.h
+/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/gtest-1.8.1/gtest.h
 limits
 -
 ostream
@@ -166,21 +166,21 @@ vector
 tuple
 -
 absl/strings/string_view.h
-/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/gtest-1.8.1/absl/strings/string_view.h
+/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/gtest-1.8.1/absl/strings/string_view.h
 absl/types/optional.h
-/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/gtest-1.8.1/absl/types/optional.h
+/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/gtest-1.8.1/absl/types/optional.h
 absl/types/variant.h
-/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/gtest-1.8.1/absl/types/variant.h
+/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/gtest-1.8.1/absl/types/variant.h
 iosfwd
 -
 vector
 -
 
-/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/tests_funciones.cpp
+/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/tests_funciones.cpp
 gtest-1.8.1/gtest.h
-/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/gtest-1.8.1/gtest.h
+/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/gtest-1.8.1/gtest.h
 funciones.cpp
-/home/martin/Documents/Facultad/Algoritmos 2/ejercitacion_uso_clases/tests/funciones.cpp
+/home/martin/Documents/Facultad/Algoritmos2/algoritmos2/ejercitacion_uso_clases/tests/funciones.cpp
 set
 -
 
