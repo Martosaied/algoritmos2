@@ -84,5 +84,6 @@ TAD Fila
         SeColo?(p, ColarseAdelanteDe(p, q, llegar(q, f))) ≡ true
 
         //parte 3
-        Entro?(p, f) ≡ Esperando(p, f) ∨ FueAtendido(p ,f) ∨ //como axiomatizo que alguien se retiro sin ser atendido
+        Entro?(p, f) ≡ Esperando(p, f) ∨ FueAtendido(p ,f) ∨ (¬Esperando(p, f) ∧ ¬FueAtendido(p ,f)) 
+        //De esta forma no puedo asegurar que realmente estuvo en la fila
 Fin TAD
