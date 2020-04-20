@@ -37,3 +37,52 @@ acciones a registrar
     apertura de la ventanilla
     llegada de un nuevo cliente a la fila
     atencion del cliente que estuviera en primer lugar (con su consecuente egreso de la fila).
+
+
+TAD Fila
+    igualdad observacional
+        (∀ f,f' : fila)(f = f' ↔ (∀ p)(Vacia(f) = Vacia(f') ∧L Esperando(p, f) = Esperando(p, f') ∧ Posicion(p,f) = Posicion(p,f')))
+
+    generos fila
+
+    generadores
+        AbrirVentanilla  : → fila
+        Llegar           : persona p × fila f → fila   {¬Esperando(p, f)}
+
+    observadores basicos
+        Esperando        : persona × fila → bool
+        Posicion         : persona p × fila f → nat    {Esperando(p, f)}
+        Vacia            : fila → bool
+
+
+    otras operaciones
+        Atender          : fila f → fila  {¬Vacia(f)}
+        Longitud         : fila → nat
+
+        //parte 2
+        Retirarse        : persona p × fila f → fila {Esperando(p, f)}
+        ColarseAdelanteDe : persona p × persona q × fila f → fila {¬Esperando(p, f) ∧ Esperando(q, f)}
+        SeColo?          : persona p × fila f → bool {Esperando(p, f)}
+
+        //parte 3
+        Entro? : persona × fila → bool
+        FueAtendido? : persona × fila → bool
+
+    axiomas
+        AbrirVentanilla() ≡ <>
+        Vacia(<>) ≡ true
+        Vacia(Llegar(p,f)) ≡ false
+        Esperando(q, Llegar(p,f)) ≡ if q = p then true else Esperando(q, f) 
+        Esperando(q, <>) ≡ false
+        Posicion(q, Llegar(p,f)) ≡ if p = q then 0 else 1 + Posicion(q, f) 
+        Atender(Llegar(p,f)) ≡ f
+        Longitud(Llegar(p,f)) ≡ if (Vacia(f)) then 0 else 1 + Longitud(f)
+
+        //parte 2
+        Retirarse(q, Llegar(p ,f)) ≡ if (q = p) then f else Llegar(p, Retirarse(f))
+        ColarseAdelanteDe(p, q, Llegar(t, f)) ≡ if (q = t) then Llegar(p, Llegar(t, f)) else ColarseAdelanteDe(p, q, f)
+        SeColo?(p, ColarseAdelanteDe(p, q, llegar(q, f))) ≡ true
+
+        //parte 3
+        Entro?(p, f) ≡ Esperando(p, f) ∨ FueAtendido(p ,f) ∨ //como axiomatizo que alguien se retiro sin ser atendido
+Fin TAD
