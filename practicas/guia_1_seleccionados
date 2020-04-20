@@ -1,0 +1,39 @@
+Parte 1
+
+#Ejercicio 6b
+cantHojas: rosetree(α) → nat
+cantHojas(rt) ≡ if hijos(rt) = 0 then 1 else sumarHojas(hijos(rt))
+
+esHoja: rosetree(α) → bool
+esHoja(rt) ≡ vacia?(hijos(rt))
+
+sumarHojas: sec(rosetree(α)) → nat
+sumarHojas(e • s) ≡ if vacía?(s) then 0 else cantHojas(prim(s)) + sumarHojas(fin(s)) fi
+
+
+#Ejercicio 6c
+podar: rosetree(α) → rosetree(α)
+podar(r)               ≡ rose(raíz(r), podadora(hijos(r)))
+podar(rose(a, rs • s)) ≡ if (vacio?(hijos(rs))) then a else podar(rs)
+
+podadora: secu(rosetree(α)) → secu(rosetree(α))
+podadora(<>)       ≡ <>
+podadora(rs • srs) ≡ if(esHoja(rs)) then podadora(srs) else podar(rs) • podadora(srs)
+
+#Ejercicio 6d
+ramas_menor_k: rosetree(α) × nat → sec(sec(α))
+ramas_menor_k(rt, n) ≡ filtrar_n(obtener_ramas(rt), n)
+
+obtener_ramas: rosetree(α) → sec(sec(α))
+obtener_ramas(<>) ≡ <>
+obtener_ramas(rose(a, s)) ≡ obtener_ramas(hijos(prim(s))) • obtener_ramas(fin(s)) //NO; PENSAR
+
+#Ejercicio 6e
+#Ejercicio 6f
+
+
+#Ejercicio 2.3 Modelado
+acciones a registrar
+    apertura de la ventanilla
+    llegada de un nuevo cliente a la fila
+    atencion del cliente que estuviera en primer lugar (con su consecuente egreso de la fila).
