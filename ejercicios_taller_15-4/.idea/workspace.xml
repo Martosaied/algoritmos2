@@ -16,9 +16,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2ac8c4d6-7c88-46e5-8d03-f5160e2a3ce8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/tests_ejercitacion.dir/tests/tests_funciones.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/tests_ejercitacion.dir/tests/tests_funciones.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/tests_ejercitacion" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/tests_ejercitacion" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/funciones.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/funciones.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +94,7 @@
       <updated>1586984557333</updated>
       <workItem from="1586984561750" duration="6109000" />
       <workItem from="1586999236018" duration="2035000" />
-      <workItem from="1587033922692" duration="2630000" />
+      <workItem from="1587033922692" duration="3243000" />
     </task>
     <servers />
   </component>
