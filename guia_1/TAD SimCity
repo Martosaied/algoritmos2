@@ -1,0 +1,57 @@
+TAD SimCity
+    generos simcity
+
+
+    igualdad observacional
+        (∀sc,sc': simcity)(sc =obs sc' ↔ mapa(sc) =obs mapa(sc'))
+
+    generadores
+        nuevaPartida : mapa → simcity
+        nuevoTurno   : conj(casa) casas × conj(comercio) coms × simcity → simcity  {#casas + #coms > 0}
+
+    
+    observadores
+        mapa : simcity → mapa (no es mas minimal esto? en general se pide que los observadores sean minimales)
+
+    otras operaciones
+
+    axiomas
+        mapa(nuevaPartida(m)) ≡ m
+        mapa(nuevoTurno(casas, coms, sc)) ≡ <π1(mapa(sc)), incrementarUnoCasa(π2(mapa(sc)) U noRepetidos(casas)), incrementarUnoComercio(π2(mapa(sc)) U noRepetidos(coms))>
+
+        
+Fin TAD
+
+
+TAD Rio ES Tupla(nat, nat) //primer nat es el eje el segundo es la coorden
+
+TAD Mapa ES <conj(rio), conj(casa), conj(comercio)> 
+
+TAD Comercio
+    genero comercio
+
+    igualdad observacional
+        (∀ c, c')(c =obs c' ↔ nivel(c) = nivel(c') ∧ posicion(c) = posicion(c'))
+
+    generadores
+        agregarComercio: → comercio
+        subirNivel: comercio × conj(casa) → comercio
+
+    observadores
+        nivel: comercio → comercio
+        posicion(?): comercio → (nat, nat) 
+
+    axiomatizacion
+        blabla
+
+Fin TAD
+
+TAD Construccion
+    //(pato: para mi es al pedo)
+    esCasa?()     : tripla → bool
+    esComercio?() : tripla → bool
+    
+
+Pregunta: 
+    - Esta bien restringir el dominio de la funcion para no poder agregar una construccion en caso de haber una en el mismo lugar?
+    - Hola profes, no sabemos si al hacer un tad comercio y un tad casas estamos sobreespecificando

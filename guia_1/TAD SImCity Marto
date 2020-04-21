@@ -1,0 +1,37 @@
+TAD Comercio
+    genero comercio
+
+    igualdad observacional
+        (∀ c, c')(c =obs c' ↔ nivel(c) = nivel(c') ∧ posicion(c) = posicion(c'))
+
+    generadores
+        agregarComercio: → comercio
+        subirNivel: comercio × conj(casa) → comercio
+
+    observadores
+        nivel: comercio → nat
+        posicion(?): comercio → (nat, nat) 
+
+    axiomatizacion
+        --
+
+Fin TAD
+
+TAD Casa
+    genero casa
+
+    igualdad observacional
+        (∀ c, c')(c =obs c' ↔ nivel(c) = nivel(c') ∧ posicion(c) = posicion(c'))
+
+    generadores
+        agregarCasa: → comercio
+        subirNivel: casa → casa
+
+    observadores
+        nivel: casa → nat
+        posicion(?): casa → (nat, nat) 
+
+    axiomatizacion
+        --
+
+Fin TAD

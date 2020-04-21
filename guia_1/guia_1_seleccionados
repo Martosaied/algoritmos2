@@ -32,7 +32,7 @@ obtener_ramas(rose(a, s)) ≡ obtener_ramas(hijos(prim(s))) • obtener_ramas(fi
 #Ejercicio 6f
 
 
-#Ejercicio 2.3 Modelado
+#Ejercicio 2.3.1 Modelado
 acciones a registrar
     apertura de la ventanilla
     llegada de un nuevo cliente a la fila
@@ -86,4 +86,34 @@ TAD Fila
         //parte 3
         Entro?(p, f) ≡ Esperando(p, f) ∨ FueAtendido(p ,f) ∨ (¬Esperando(p, f) ∧ ¬FueAtendido(p ,f)) 
         //De esta forma no puedo asegurar que realmente estuvo en la fila
+Fin TAD
+
+#Ejercicio 2.3.2
+TAD Tecnico ES String
+
+TAD Tecnicos a Domicilio
+    genero tecadom
+
+    usa direccion, tecnico
+
+    igualdad observacional
+
+
+    generadores
+        crearTAD: → tecadom
+        añadirPedido: direccion × tecadom → tecadom  {restricciones?}
+        terminarPedido: direccion × tecadom → tecadom  {restricciones?}
+        enviarTecnico: tecnico × direccion × tecadom → tecadom {restricciones?}
+        llegoTecnico: tecnico × tecadom → tecadom
+        ponerEnPDA: direccion × tecadom → tecadom
+
+    observadores
+        tecnicosDisp: tecadom → conj(tecnico)
+        tecnicosOcup: tecadom → conj(tecnico)
+        tecnicosEnCentral: tecadom → conj(tecnico)
+        pedidosPDA: tecadom → conj(direccion)
+        pedidosAtendidos: tecadom → conj(direccion)
+        masVisitas: direccion × tecadom → conj(tecnico)
+
+
 Fin TAD
