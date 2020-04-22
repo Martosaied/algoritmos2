@@ -108,6 +108,7 @@ TEST(Recordatorio, ostream) {
 
 #endif
 
+#if EJ >= 14
 TEST(Agenda, ordenado) {
   Agenda a(Fecha(5, 10));
   a.agregar_recordatorio(Recordatorio(Fecha(5, 10), Horario(9, 0), "Clase Algo2"));
@@ -161,3 +162,4 @@ TEST(Agenda, cambio_dia) {
   ss2c << "Labo Algo2 @ 10/5 11:0" << endl;
   EXPECT_EQ(ss2.str(), ss2c.str());
 }
+#endif

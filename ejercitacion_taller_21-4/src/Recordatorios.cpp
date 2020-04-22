@@ -32,10 +32,7 @@ class Fecha {
     int mes_;
 };
 
-Fecha::Fecha(int mes, int dia) {
-    this->dia_ = dia;
-    this->mes_ = mes;
-}
+Fecha::Fecha(int mes, int dia) : dia_(dia), mes_(mes) {}
 
 int Fecha::mes() {
     return this->mes_;
@@ -82,10 +79,7 @@ class Horario {
         uint hora_;
 };
 
-Horario::Horario(uint hora, uint min) {
-    this->hora_ = hora;
-    this->min_ = min;
-}
+Horario::Horario(uint hora, uint min): hora_(hora), min_(min) {}
 
 uint Horario::hora() {
     return this->hora_;
@@ -133,9 +127,8 @@ private:
 
 Recordatorio::Recordatorio(Fecha fecha, Horario horario, string mensaje) :
     fecha_(fecha.mes(), fecha.dia()),
-    horario_(horario.hora(), horario.min()) {
-        this->mensaje_ = mensaje;
-}
+    horario_(horario.hora(), horario.min()),
+    mensaje_(mensaje) {}
 
 Fecha Recordatorio::fecha() {
     return this->fecha_;
@@ -170,9 +163,7 @@ private:
     list<Recordatorio> recordatorios_;
 };
 
-Agenda::Agenda(Fecha fecha_inicial) : fecha_actual_(fecha_inicial.mes(), fecha_inicial.dia()){
-    this->recordatorios_ = {};
-}
+Agenda::Agenda(Fecha fecha_inicial) : fecha_actual_(fecha_inicial.mes(), fecha_inicial.dia()), recordatorios_() {};
 
 void Agenda::agregar_recordatorio(Recordatorio rec) {
     this->recordatorios_.push_back(rec);

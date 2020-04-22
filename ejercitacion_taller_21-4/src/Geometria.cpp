@@ -17,10 +17,7 @@ private:
 
 };
 
-Rectangulo::Rectangulo(uint alto, uint ancho) {
-    this->alto_ = alto;
-    this->ancho_ = ancho;
-};
+Rectangulo::Rectangulo(uint alto, uint ancho): alto_(alto), ancho_(ancho) {};
 
 uint Rectangulo::alto() {
     return this->alto_;
@@ -62,10 +59,7 @@ float Elipse::area() {
     return this->r_a_ * this->r_b_ * PI;
 }
 
-Elipse::Elipse(uint r_a, uint r_b) {
-    this->r_a_ = r_a;
-    this->r_b_ = r_b;
-}
+Elipse::Elipse(uint r_a, uint r_b): r_a_(r_a), r_b_(r_b) {};
 
 // Ejercicio 3
 
