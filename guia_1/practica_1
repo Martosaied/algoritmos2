@@ -1,0 +1,179 @@
+-- Parte 2 --
+-- Ejercicio 7
+
+Ejercicio 7 (Polinomios) F
+Se quieren especificar los polinomios con coeficientes naturales, sabiendo que:
+Un numero natural es un polinomio.
+La indeterminada X es un polinomio.
+Si p1 y p2 son dos polinomios, entonces la suma p1 + p2 y el producto p1 · p2 son polinomios.
+Se desea tener en el tipo una operacion de evaluacion, que dado un polinomio y un numero natural lo evalue de
+la manera habitual y otra que indique si un numero natural es raız de un polinomio. Completar la especificacion
+a partir de la signatura dada.
+
+TAD Polinomio
+    generos polinomio
+    
+    igualdad observacional
+        (∀p1, p2 : polinomio) (p1 =obs p2 ⇐⇒ ((∀n : nat)(Evaluar(p1, n) =obs Evaluar(p2, n))))
+    
+    observadores basicos
+        Evaluar : polinomio × nat −→ nat
+
+    generadores
+        Cte : nat −→ polinomio
+        X : −→ polinomio
+        • + • : polinomio × polinomio −→ polinomio
+        • · • : polinomio × polinomio −→ polinomio
+
+    otras operacions
+        EsRaiz?: polinomio × nat → bool
+
+    axiomas
+        Evaluar(Cte(a), b) ≡ a
+        Evaluar(X, b) ≡ b
+        Evaluar(p + q, a) ≡ Evaluar(p, a) + Evaluar(q, a)
+        Evaluar(p * q, a) ≡ Evaluar(p, a) * Evaluar(q, a)
+
+        EsRaiz?(Cte(a), b) ≡ false         
+        EsRaiz?(X, a) ≡ a = 0
+        EsRaiz?(p + q, a) ≡ Evaluar(p, a) + Evaluar(q, a) = 0         
+        EsRaiz?(p * q, a) ≡ EsRaiz?(p, a) ∨ EsRaiz?(q, a)         
+Fin TAD
+
+
+-- Ejercicio 8
+
+Especifique tipos para un robot que realiza un camino a traves de un plano de coordenadas cartesianas
+(enteras), es decir, tiene operaciones para ubicarse en un coordenada, avanzar hacia arriba, hacia abajo, hacia
+la derecha y hacia la izquierda, preguntar por la posicion actual, saber cuantas veces paso por una coordenada
+dada y saber cual es la coordenada mas a la derecha por donde paso.
+Completar la especificacion a partir de la siguiente signatura:
+
+
+TAD Robot
+    igualdad observacional
+        (∀r1, r2 : robot) (r1 =obs r2 ⇐⇒ (Trayectoria(r1) =obs Trayectoria(r2)))
+    
+    observadores basicos
+        Trayectoria : robot −→ secuencia(coordenada)
+    
+    generadores
+        Ubicar : coordenada −→ robot
+        Arriba : robot −→ robot
+        Abajo : robot −→ robot
+        Derecha : robot −→ robot
+        Izquierda : robot −→ robot
+    
+    otras operaciones
+        PosicionActual : robot −→ coordenada
+        CuantasVecesPaso : coordenada × robot −→ nat
+        MasALaDerecha : robot −→ coordenada
+    
+    axiomas
+        Trayectoria(Ubicar(coordenada)) ≡ coordenada • <>
+        Trayectoria(Arriba(robot)) ≡ <π1(PosicionActual(robot)), π2(PosicionActual(robot)) + 1> • Trayectoria(robot)
+        Trayectoria(Abajo(robot)) ≡ <π1(PosicionActual(robot)), π2(PosicionActual(robot)) - 1> • Trayectoria(robot)
+        Trayectoria(Derecha(robot)) ≡ <π1(PosicionActual(robot)) + 1, π2(PosicionActual(robot))> • Trayectoria(robot)
+        Trayectoria(Izquierda(robot)) ≡ <π1(PosicionActual(robot)) - 1, π2(PosicionActual(robot))> • Trayectoria(robot)
+
+        PosicionActual(robot) ≡ prim(Trayectoria(robot))
+        CuantasVecesPaso(coordenada, robot) ≡ CuantasVecesPasoTr(coordenada, Trayectoria(robot))
+        CuantasVecesPasoTr(coordenada, tr) ≡ if coordenada = prim(tr)
+                                                then 1 + CuantasVecesPasoTr(coordenada, fin(tr))
+                                                else CuantasVecesPasoTr(coordenada, fin(tr))
+                                             fi
+        MasALaDerecha(robot) ≡ MasALaDerechaTr(Trayectoria(robot))
+        MasALaDerechaTr(cor • tr) ≡ if π1(cor) > π1(prim(tr))
+                                        then MasALaDerechaTr(cor • fin(tr))
+                                        else MasALaDerechaTr(tr)
+                                     fi
+Fin TAD
+TAD Coordenada es Tupla(entero × entero)
+
+-- Ejercicio 9
+Se dispone de una cinta circular, dividida en una cantidad fija de celdas, sobre las cuales pueden o no existir
+elementos metalicos. Esta cinta se mueve en ambos sentidos.
+Sobre la cinta se encuentra montado un electroiman que atrae los elementos metalicos de la cinta cuando
+estos quedan debajo de el. La disposicion inicial de los elementos sobre la cinta puede ser cualquiera.
+El iman puede estar prendido o apagado, y solo atrae elementos cuando esta prendido y no esta cargado
+(ocupado) con algun elemento previamente atraıdo. Ademas, el iman solo puede apagarse si el objeto atraıdo
+(de haberlo) puede ser depositado debajo en la cinta.
+Tanto el iman como cada celda de la cinta solo pueden contener un elemento a la vez, es decir que si el iman
+tiene atraıdo un elemento no puede atraer otro, y que si sobre una celda hay un elemento no puede soltarse
+sobre ella el elemento que tenga atraıdo el iman.
+Por convencion numeraremos las celdas de la cinta de 0 a n-1, siendo n la cantidad total de celdas. Ademas
+suponemos que la celda inicial es la numero 0.
+Se desea conocer cuantas veces se aplicaron las funciones “girar la cinta” a la izquierda y a la derecha (← y
+→ respectivamente), por separado, y si hay o no elementos metalicos sobre cada celda de la cinta.
+Completar la especificacion a partir de la signatura dada.
+
+TAD Electroiman
+    igualdad observacional
+        (∀ e1, e2: electroiman)
+        (e1 = e2 ↔ Cinta(e1) = Cinta(e2) ∧ 
+         ImanPrendido?(e1) = ImanPrendido?(e2) ∧L 
+         ImanCargado?(e1) = ImanCargado?(e2)
+        )
+
+    observadores basicos
+        Cinta : electroiman −→ cinta
+        ImanPrendido? : electroiman −→ bool
+        ImanCargado? : electroiman e −→ bool {ImanPrendido?(e)}
+    
+    generadores
+        Arrancar : cinta −→ electroiman
+        Prender : electroiman e −→ electroiman {¬ImanPrendido?(e)}
+        Apagar : electroiman e −→ electroiman {ImanPrendido?(e) ∧L (ImanCargado?(e) ⇒ ¬CeldaActualOcupada?(e))}
+        ← : electroiman −→ electroiman
+        → : electroiman −→ electroiman
+    
+    otras operaciones
+        CeldaActualOcupada? : electroiman −→ bool
+        #Giros← : electroiman −→ nat
+        #Giros→ : electroiman −→ nat
+    
+    axiomas
+        Cinta(Arrancar(cinta)) ≡ cinta
+        Cinta(Prender(electroiman)) ≡ if CeldaActualOcupada?(Cinta(electroiman)) then SacarElem(Cinta(electroiman)) else Cinta(electroiman) fi
+        Cinta(Apagar(electroiman)) ≡ if imanCargado?(electroiman) then ponerElem(cinta(electroiman)) else cinta(electroiman) fi
+        Cinta(→(electroiman)) ≡ →Cinta(electroiman)
+        Cinta(←(electroiman)) ≡ ←Cinta(electroiman)
+
+        ImanPrendido?(Arrancar(electroiman)) ≡ false
+        ImanPrendido?(Prender(electroiman)) ≡ true
+        ImanPrendido?(Apagar(electroiman)) ≡ false
+        ImanPrendido?(→(electroiman)) ≡ ImanPrendido(electroiman)
+        ImanPrendido?(←(electroiman)) ≡ ImanPrendido(electroiman)
+
+        ImanCargado?(Prender(electroiman)) ≡ CeldaActualOcupada?(Cinta(electroiman))
+        ImanCargado?(Apagar(electroiman)) ≡ false
+        ImanCargado?(→(electroiman)) ≡ ImanCargado(electroiman)
+        ImanCargado?(←(electroiman)) ≡ ImanCargado(electroiman)
+
+
+Fin TAD
+
+TAD Cinta
+    igualdad observacional
+        (. . .)
+    
+    observadores basicos
+        #Celdas : cinta −→ nat
+        CeldaOcupada? : nat n × cinta c −→ bool {n < #Celdas(c)}
+        CeldaActual : cinta −→ nat
+        #Giros← : cinta −→ nat
+        #Giros→ : cinta −→ nat
+
+    generadores
+        Arrancar : nat n −→ cinta {n > 0}
+        PonerElem : cinta c −→ cinta {¬CeldaActualOcupada?(c)}
+        SacarElem : cinta c −→ cinta {CeldaActualOcupada?(c)}
+        ← : cinta −→ cinta
+        → : cinta −→ cinta
+
+    otras operaciones
+        CeldaActualOcupada? : cinta −→ bool
+        #Elem : cinta −→ nat
+    
+    axiomas . . .
+Fin TAD

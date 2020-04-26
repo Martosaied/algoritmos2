@@ -41,21 +41,26 @@ acciones a registrar
 
 TAD Fila
     igualdad observacional
-        (∀ f,f' : fila)(f = f' ↔ (∀ p)(Vacia(f) = Vacia(f') ∧L Esperando(p, f) = Esperando(p, f') ∧ Posicion(p,f) = Posicion(p,f')))
+        (∀ f,f' : fila)(f = f' ↔ (∀ p: persona)(Esperando(p, f) = Esperando(p, f') ∧ Posicion(p,f) = Posicion(p,f')))
 
     generos fila
 
     generadores
         AbrirVentanilla  : → fila
         Llegar           : persona p × fila f → fila   {¬Esperando(p, f)}
+        //deberia para la parte 2 agregar ColarseAdelanteDe como generador?
+        ColarseAdelanteDe : persona p × persona q × fila f → fila {¬Esperando(p, f) ∧ Esperando(q, f)}
+        //para la parte 3 agrego Retirarse como generador
+        Retirarse        : persona p × fila f → fila {Esperando(p, f)}
+
 
     observadores basicos
         Esperando        : persona × fila → bool
         Posicion         : persona p × fila f → nat    {Esperando(p, f)}
-        Vacia            : fila → bool
 
 
     otras operaciones
+        Vacia            : fila → bool
         Atender          : fila f → fila  {¬Vacia(f)}
         Longitud         : fila → nat
 
@@ -69,12 +74,17 @@ TAD Fila
         FueAtendido? : persona × fila → bool
 
     axiomas
-        AbrirVentanilla() ≡ <>
-        Vacia(<>) ≡ true
+        Vacia(AbrirVentanilla()) ≡ true
         Vacia(Llegar(p,f)) ≡ false
-        Esperando(q, Llegar(p,f)) ≡ if q = p then true else Esperando(q, f) 
-        Esperando(q, <>) ≡ false
-        Posicion(q, Llegar(p,f)) ≡ if p = q then 0 else 1 + Posicion(q, f) 
+        Esperando(q, AbrirVentanilla()) ≡ false
+        Esperando(q, Llegar(p,f)) ≡ if q = p 
+                                        then true 
+                                        else if Vacia(f)
+                                            then false
+                                            else Esperando(q, f)
+                                        fi
+                                    fi 
+        Posicion(q, Llegar(p,f)) ≡ if p = q then Longitud(f) + 1 else Posicion(q, f)
         Atender(Llegar(p,f)) ≡ f
         Longitud(Llegar(p,f)) ≡ if (Vacia(f)) then 0 else 1 + Longitud(f)
 
@@ -84,11 +94,19 @@ TAD Fila
         SeColo?(p, ColarseAdelanteDe(p, q, llegar(q, f))) ≡ true
 
         //parte 3
-        Entro?(p, f) ≡ Esperando(p, f) ∨ FueAtendido(p ,f) ∨ (¬Esperando(p, f) ∧ ¬FueAtendido(p ,f)) 
+        Entro?(p, Llegar(q, f)) ≡ Esperando(p, f) ∨ FueAtendido(p ,f) ∨ (¬Esperando(p, f) ∧ ¬FueAtendido(p ,f)) 
+        FueAtendido?(p, AbrirVentanilla()) ≡ false
+        FueAtendido?(q, f) ≡ if Esperando(p, Llegar(p,f)) 
+                                            then false 
+                                            else Entro?(p, )
+
         //De esta forma no puedo asegurar que realmente estuvo en la fila
 Fin TAD
 
 #Ejercicio 2.3.2
+comportamientos aut:
+    - envio de tecnico si esta disponible
+    - 
 TAD Tecnico ES String
 
 TAD Tecnicos a Domicilio
@@ -98,14 +116,11 @@ TAD Tecnicos a Domicilio
 
     igualdad observacional
 
-
     generadores
         crearTAD: → tecadom
         añadirPedido: direccion × tecadom → tecadom  {restricciones?}
         terminarPedido: direccion × tecadom → tecadom  {restricciones?}
-        enviarTecnico: tecnico × direccion × tecadom → tecadom {restricciones?}
-        llegoTecnico: tecnico × tecadom → tecadom
-        ponerEnPDA: direccion × tecadom → tecadom
+        tecnicoDisp: tecnico × tecadom → tecadom
 
     observadores
         tecnicosDisp: tecadom → conj(tecnico)

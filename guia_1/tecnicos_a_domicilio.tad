@@ -1,0 +1,136 @@
+#Ejercicio 2.3.2
+comportamientos aut:
+    - envio de tecnico si esta disponible
+    - 
+
+TAD Service
+    genero service
+
+    usa direccion, tecnico
+
+    igualdad observacional
+
+    generadores
+        CrearServicio: conj(tecnico) → service
+        Solicitar: direccion × service → service  {dir ̸∈ PedidosPendientes(s)}
+        Terminar: direccion dir × service s → service  {dir ∈ PedidosPendientes(s)}
+
+    observadores
+        Tecnicos: service → conj(tecnico)
+        TecnicosDisponibles: service → conj(tecnico)
+        TecnicosOcupados: service → conj(tecnico)
+        TecnicosEnCentral: service → conj(tecnico)
+        TecnicoAsignado: direccion × service → conj(tecnico)
+        PedidosPendientes: service → conj(direccion)
+        PedidosAtendidos: service → conj(direccion)
+        
+    otras operaciones
+        MasCercano: conj(direccion) x direccion → conj(dir)
+        MasVisitas: direccion × service → conj(tecnico)
+
+    axiomas
+    Tecnicos(CrearServicio(c)) ≡ c
+    Tecnicos(Solicitar(dir, ser)) ≡ Tecnicos(ser)
+    Tecnicos(Terminar(dir, ser)) ≡ Tecnicos(ser)
+    
+    TecnicosDisponibles(CrearServicio(c)) ≡ c
+    TecnicosDisponibles(Solicitar(dir, ser)) ≡ if ∅?(TecnicosDisponibles(ser))
+                                                    then ∅
+                                                    else TecnicosDisponibles(ser) - TecnicoAsignado(dir, ser)
+                                                fi
+    TecnicosDisponibles(Terminar(dir, ser)) ≡   if ∅?PedidosPendientes(service)
+                                                    then 
+                                                        TecnicoAsignado(dir) U TecnicosDisponibles(ser)
+                                                    else
+                                                        TecnicosDisponibles(ser)
+                                                fi
+
+    TecnicosOcupados(ser) ≡ Tecnicos(ser) - TecnicosDisponibles(ser)
+    --no por ahora--  TecnicosEnCentral()
+    TecnicoAsignado(dir, CrearService(c)) ≡ dameUno(c)
+    TecnicoAsignado(dir, Solicitar(dir', der)) ≡ if ¬dir=dir'
+                                                    then
+                                                        TecnicoAsignado(dir, ser)
+                                                    else
+                                                        if ∅?TecnicosDisponibles
+                                                            then ∅
+                                                            else dameUno(TecnicosDisponibles(ser))
+                                                        fi 
+                                                    fi
+    TecnicoAsignado(dir, Terminar(dir, ser)) ≡ TBD
+    
+    PedidosPendientes(CrearService(c)) ≡ ∅
+    PedidosPendientes(Solicitar(dir, ser)) ≡ if ∅?(TecnicoAsignado(dir, ser))
+                                                then 
+                                                    Ag(dir, PedidosPendientes(ser))
+                                                else 
+                                                    PedidosPendientes(ser)
+                                             fi 
+    PedidosPendientes(Terminar(dir, ser)) ≡ PedidosPendientes(ser) - MasCercano(PedidosPendientes(ser), dir)
+
+
+    MasCercano(∅, dir) ≡ ∅
+    MasCercano(Ag(dir', c), dir) ≡ if ∅?(c)
+                                    then
+                                        dir'
+                                    else if dist(dir, dir') < MasCercano(c)
+                                            then
+                                                Ag(dir', ∅)
+                                            else
+                                                MasCercano(c)
+                                        fi
+                                fi
+
+
+
+
+                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FIN TAD
+
+TecnicosEnCentral: 
+    saquemos este, es lo mismo que tecnicos disponibles, representa
+    si, pasa que si hay tecnicos disponibles cerca, mandamos esos, y sino hay que hacer dameUno(TecnicosEnCentral)
+    pero nosotros mandmos al que estaba asignado y temrino y sino nos fijamos los disponible
+    lo que digo es que disponible ≡ en la central
+    no teiene sentido una instancia donde haya un tecnico disponible y no este en la central
+    eso no es cuando el chabon termino un trabajo y esta viendo si hay otro para ir directo?
+    bueno puede ser, pongamos en standby Tecnicos en central y sigamos con el siguiente
+    
+
+Tecnicos a Domicilio (o simplemente “TaD”), es una empresa que provee servicio tecnico para problemas de
+electricidad en hogares y empresas. TaD cuenta con un grupo de tecnicos altamente capacitados para atender la
+demanda de sus clientes y tiene una estrategia de trabajo algo particular. Cuando alguien solicita un tecnico, la
+central de TaD verifica si alguno de sus tecnicos se encuentra en la empresa y de ser ası envıa inmediatamente
+un tecnico al domicilio de la persona. En caso de no haber tecnicos disponibles en ese momento (i.e., todos se
+encuentran atendiendo algun pedido), el pedido queda pendiente de asignacion a la espera de que algun tecnico
+se desocupe.
+Por otro lado, cuando un tecnico termina de resolver un problema, y antes de retirarse de ese domicilio, el
+tecnico avisa por radio a la central que quedo disponible para otro trabajo. Si existiesen en ese momento
+pedidos pendientes de asignacion, la central le asigna al tecnico el mas cercano al domicilio en el que este se
+encuentra y el tecnico se dirige automaticamente hacia allı (si hay mas de un pendiente a la misma distancia
+mınima, se asignara al pedido entre estos que lleve mas tiempo esperando). Por el contrario, de no haber trabajos
+pendientes, el tecnico regresa a la central y queda disponible para futuros trabajos.
+Modelar con un TAD la empresa Tecnicos a Domicilio descripta teniendo en cuenta ademas que interesa saber,
+dada una direccion, quienes fueron los tecnicos que la visitaron la mayor cantidad de veces (aun si todavıa no
+resolvieron el inconveniente tecnico).
+Observacion: Se puede asumir como dado el TAD Direccion que exporta el genero direccion y la operacion
+dist(d, d
+0
+) que devuelve un nat que representa la distancia entre las direcciones d y d
+0
+.
