@@ -14,7 +14,6 @@ uint dias_en_mes(uint mes) {
     return dias[mes - 1];
 }
 
-// Ejercicio 7, 8, 9 y 10
 
 // Clase Fecha
 class Fecha {
@@ -23,9 +22,7 @@ class Fecha {
     int mes();
     int dia();
     void incrementar_dia();
-    #if EJ >= 9 // Para ejercicio 9
     bool operator==(Fecha o);
-    #endif
 
   private:
     int dia_;
@@ -47,13 +44,11 @@ ostream& operator<<(ostream& os, Fecha f) {
     return os;
 }
 
-#if EJ >= 9
 bool Fecha::operator==(Fecha o) {
     bool igual_dia = this->dia() == o.dia();
     bool igual_mes = this->mes() == o.mes();
     return igual_dia && igual_mes;
 }
-#endif
 
 void Fecha::incrementar_dia() {
     if(this->dia() == dias_en_mes(this->mes())) {
@@ -63,7 +58,6 @@ void Fecha::incrementar_dia() {
         this->dia_++;
     }
 }
-// Ejercicio 11, 12
 
 // Clase Horario
 class Horario {
@@ -109,7 +103,6 @@ bool Horario::operator<(Horario h) {
     return false;
 }
 
-// Ejercicio 13
 
 // Clase Recordatorio
 class Recordatorio {
@@ -153,7 +146,6 @@ bool Recordatorio::operator<(Recordatorio r) {
 
 }
 
-// Ejercicio 14
 
 // Clase Agenda
 class Agenda {

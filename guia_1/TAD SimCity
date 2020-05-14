@@ -1,57 +1,110 @@
+
+Pregunta: 
+    - Esta bien restringir el dominio de la funcion para no poder agregar una construccion en caso de haber una en el mismo lugar?
+    - Hola profes, no sabemos si al hacer un tad comercio y un tad casas estamos sobreespecificando
+
+tenemos un mapa(definido y constante), el cual es una grilla(x,y)
+en el mapa corren rios de manera horizontal(x) o vertical(y) de manera infinita(solo me importa una de las dos coordenadas)
+
+tenemos casas y comercios  
+    en cada turno se agrega al menos una construccion
+    cada uno ocupa una casilla(no puede haber otra cosa en ese lugar)
+    tienen  un nivel de avance que cambia de forma automatica con el pasar de los turnos
+
 TAD SimCity
     generos simcity
 
 
     igualdad observacional
-        (∀sc,sc': simcity)(sc =obs sc' ↔ mapa(sc) =obs mapa(sc'))
+        (∀sc,sc': simcity)(sc =obs sc' ↔ mapa(sc) =obs mapa(sc') ∧L (∀ c : construccion)(
+                            (c ∈ casas(sc) =obs c ∈ casas(sc′) ∧ 
+                            (c ∈ casas(sc) ⇒ nivel(c, sc) =obs nivel(c, sc′)) 
+                            ∧ (c ∈ comercios(sc) =obs c ∈ comercios(sc′) ∧ (c ∈ comercios(sc) ⇒ nivel(c, sc) =obs nivel(c, sc′)))
+                            )))
 
-    generadores
-        nuevaPartida : mapa → simcity
-        nuevoTurno   : conj(casa) casas × conj(comercio) coms × simcity → simcity  {#casas + #coms > 0}
+        (∀sc,sc': simcity)(sc =obs sc' ↔ mapa(sc) = mapa(sc') ∧ casas(sc) = casas(sc') ∧ comercios(sc) = comercios(sc') ∧L
+                            (∀c: construccion)( (c ∈ casas(sc) ∨ c ∈ comercios(sc)) ⇒ nivel(c, sc)) = nivel(c, sc')) // alternativa pato
 
     
     observadores
-        mapa : simcity → mapa (no es mas minimal esto? en general se pide que los observadores sean minimales)
+        mapa      : simcity → mapa
+        casas     : simcity → conj(construccion)
+        comercios : simcity → conj(construccion)
+        nivel     : construccion × simcity → nat
+
+        nivel(const, nuevoTurno(casas, comercios, sc)) ≡ if const ∈ casas ∨ const ∈ comercios then //NO ES ASI
+                                                            0
+                                                        else
+                                                            1 + nivel(casa, sc)
+                                                        fi
+
+    generadores
+        nuevaPartida : mapa → simcity
+        nuevoTurno   : conj(construccion) casas × conj(construccion) coms × simcity → simcity  {#casas + #coms > 0}
 
     otras operaciones
+        casasA3Casilleros: construccion × conj(construccion) × simcity → conj(construccion)
+        mayorNivelCasas: conj(construccion) casas × simcity sc → nat {casas ⊂ casas(sc)}
+        manhattan: nat × nat × nat × nat → nat
+        moduloResta: nat × nat → nat
 
     axiomas
         mapa(nuevaPartida(m)) ≡ m
         mapa(nuevoTurno(casas, coms, sc)) ≡ <π1(mapa(sc)), incrementarUnoCasa(π2(mapa(sc)) U noRepetidos(casas)), incrementarUnoComercio(π2(mapa(sc)) U noRepetidos(coms))>
 
-        
+        manhattan(x1, y1, x2, y2) = moduloResta(x1, x2) + moduloResta(y1, y2)
+        nivel(const, nuevoTurno(casas, comercios, sc)) ≡ if const ∈ casas ∨ const ∈ comercios then 
+                                                                0
+                                                         else if const ∈ casas(sc) then
+                                                                1 + nivel(const, sc)
+                                                              else if ¬∅?(casasA3Casilleros(construccion, casas(sc),sc))
+                                                                        then mayorNivelCasas(casasA3Casilleros(construccion, casas(sc),sc), sc)
+                                                                        else 1 + nivel(const, sc)
+                                                                   fi
+                                                               fi
+                                                         fi
+        casasA3Casilleros(<x,y>, ∅, sc) ≡ ∅                                              
+        casasA3Casilleros(<x,y>, casas, sc) ≡ if manhattan(x, y, π1(dameUno(casas)), π2(dameUno(casas))) <= 3 then
+                                                        Ag(dameUno(casas), casasA3Casilleros(<x,y>, sinUno(casas), sc))
+                                                    else 
+                                                        casasA3Casilleros(<x,y>, sinUno(casas), sc)
+                                                    fi
+        mayorNivelCasas(∅, sc) ≡ 0
+        mayorNivelCasas(casas, sc) ≡ if mayorNivelCasas(sinUno(casas), sc) < nivel(dameUno(casas), sc)
+                                            then nivel(dameUno(casas), sc)
+                                            else mayorNivelCasas(sinUno(casas), sc)
+                                       fi
+                                                                
+                                                                
+        moduloResta(n, m) ≡ if n < m then
+                        m - n 
+                    else
+                        n - m
+                    fi
 Fin TAD
 
 
-TAD Rio ES Tupla(nat, nat) //primer nat es el eje el segundo es la coorden
+TAD Construccion ES tupla(nat, nat)  
 
-TAD Mapa ES <conj(rio), conj(casa), conj(comercio)> 
-
-TAD Comercio
-    genero comercio
+TAD Mapa
+    generos mapa
 
     igualdad observacional
-        (∀ c, c')(c =obs c' ↔ nivel(c) = nivel(c') ∧ posicion(c) = posicion(c'))
+    (∀m, m': mapa)(m =obs m' ⟺ (∀coord: tupla(nat, nat))(estaOcupado(coord, m) = estaOcupado(coord, m')))
+
+    observadores basicos
+    estaOcupado: tupla(nat, nat) × mapa → bool
 
     generadores
-        agregarComercio: → comercio
-        subirNivel: comercio × conj(casa) → comercio
+    vacio: → mapa
+    agregarRioVertical: nat × mapa→ mapa
+    agregarRioHorizantal: nat × mapa→ mapa
 
-    observadores
-        nivel: comercio → comercio
-        posicion(?): comercio → (nat, nat) 
+    otras operaciones
 
-    axiomatizacion
-        blabla
+    axiomas
+    estaOcupado(<x, y>, vacio) ≡ false
+    estaOcupado(<x, y>, agregarRioVertical(x', mapa)) ≡ x = x' ∨ estaOcupado(<x, y>, mapa)
+    estaOcupado(<x, y>, agregarRioHorizantal(y', mapa)) ≡ y = y' ∨ estaOcupado(<x, y>, mapa)
 
 Fin TAD
-
-TAD Construccion
-    //(pato: para mi es al pedo)
-    esCasa?()     : tripla → bool
-    esComercio?() : tripla → bool
-    
-
-Pregunta: 
-    - Esta bien restringir el dominio de la funcion para no poder agregar una construccion en caso de haber una en el mismo lugar?
-    - Hola profes, no sabemos si al hacer un tad comercio y un tad casas estamos sobreespecificando

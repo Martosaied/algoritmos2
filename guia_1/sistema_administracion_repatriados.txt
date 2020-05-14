@@ -1,0 +1,112 @@
+Puntos importantes:
+    La asignacion de centros de alojamiento es automatica? SI
+    El dado de alta a los 15 dias es automatico? SI
+    "Se desea saber en todo momento que personas se alojan en cada centro y cu´antas personas fueron dadas de alta" Dadas de alta en general o por centro?
+    EN GENERAL
+    Sabemos que mover una persona de un  centro a otro no es un comportamiento automatico
+
+Se desea observar
+    personas en un centro
+    cuantas personas fueron dadas de alta
+    centro mas transitado
+
+
+Decisiones Tomadas:
+    La asignacion de centros es automatica, aterriza vuelo -> se asigna, no doy posibilidad a una instancia donde haya aterrizado un vuelo pero este "esperando asignacion"
+    El TAD Centro es nat, para poder diferenciarlos
+    Las personas son dadas de alta si diasHospedado = 14
+
+TAD Centro es Nat
+TAD Persona es String
+TAD Sistema de Administracion de Repatriados
+    genero sar
+
+    igualdad observacional
+        (∀ sar, sar': sar)(sar = sar' ↔ centros(sar) = centros(sar') ∧ (∀ c1: centro)(c1 ∈ centros(sar) → 
+                                                                        (∃ c2: centro)(c2 ∈ centros(sar') ∧ 
+                                                                            transito(c2, sar') = transito(c1, sar) ∧
+                                                                            personasActual(c2, sar') = personasActual(c1, sar) ∧
+                                                                            personasAlta(c1, sar') = personasAlta(c1, sar) ∧
+                                                                            (∀ p1: persona)(p1 ∈ personasActual(c1, sar) → 
+                                                                                (∃ p2: personas)(p2 ∈ personasActual(c2, sar) ∧ 
+                                                                                diasHospedado(p1, sar) = diasHospedado(p2, sar')
+                                                                            ))))
+
+    observadores
+        centros       : sar -> conj(centro) 
+        transito      : centro c × sar sar -> nat      {c ∈ centros(sar)}
+        personasActual: centro × sar -> conj(persona)  {c ∈ centros(sar)}
+        personasAlta  : centro × sar -> conj(persona)  {c ∈ centros(sar)}
+        diasHospedado : persona p × sar -> nat         { (∃ c: centro)(c ∈ centros(sar) ∧ p ∈ personasActual(c, sar)) }
+
+    generadores
+        abrirSar     : conj(centro) centros -> sar                        {¬∅?(centros)}
+        aterrizoVuelo: conj(persona) ps × sar sar -> sar                  {(∀ p: persona)(p ϵ ps ⇨ (∀ c: centro)(c ϵ centros(sar) ⇨ p ∉ c))}
+        moverPersona : persona p × centro c1 × centro c2 × sar sar -> sar {p ∈ personasActual(c1, sar) ∧ p ∉ personasActual(c2, sar)}
+        pasarDia     : sar -> sar
+
+    otras operaciones
+        centroMasTransitado        : sar -> centro
+        centroMasTransitadoConj    : conj(centro) cc × sar sar -> centro {cc ⊂ centros(sar)}
+        totalAlta                  : sar -> nat
+        totalAltaConj              : sar sar × conj(centro) cc -> nat           {cc ⊂ centros(sar)}
+        dia13Cuarentena            : conj(persona) cp × sar sar -> conj(persona)  {cp ⊂ personasAlta(sar)}
+        seleccionarCentro          : conj(centro) → centro //Es un renombre de dameUno para la seleccion de centro
+
+    axiomas
+        centros(abrirSar(centros)) ≡ centros
+        centros(aterrizoVuelo(personas, sar)) ≡ centros(sar)
+        centros(moverPersona(p, c1, c2, sar)) ≡ centros(sar)
+        centros(pasarDia(sar)) ≡ centros(sar)
+
+        transito(c1, abrirSar(centros)) ≡ 0
+        transito(c1, aterrizoVuelo(personas, sar)) ≡ if c1 = seleccionarCentro(centros(sar)) 
+                                                        then #(personas) + transito(c1, sar)
+                                                        else transito(c1, sar)
+                                                     fi
+        transito(c, moverPersona(p, c1, c2, sar)) ≡ if c = c2
+                                                        then 1 + transito(c, sar)
+                                                        else transito(c, sar)
+                                                    fi 
+        transito(c, pasarDia(sar)) ≡ transito(c, sar)
+
+        personasActual(c, abrirSar(centros)) ≡ ∅
+        personasActual(c, aterrizoVuelo(personas, sar)) ≡ if c = seleccionarCentro(centros(sar))
+                                                                then personas ∪ personasActual(c, sar)
+                                                                else personasActual(c, sar)
+                                                          fi
+        personasActual(c, moverPersona(p, c1, c2, sar)) ≡ if c = c2
+                                                            then Ag(p, personasActual(c2, sar))
+                                                            else if c = c1
+                                                                    then personasActual(c1, sar) - { p }
+                                                                    else personasActual(c, sar)
+                                                                fi
+                                                          fi
+        personasActual(c, pasarDia(sar)) ≡ personasActual(c, sar) - dia13Cuarentena(personasActual(c, sar), sar)
+
+        personasAlta(c, abrirSar(centros)) ≡ ∅
+        personasAlta(c, aterrizoVuelo(personas, sar)) ≡ personasAlta(c, sar)
+        personasAlta(c, moverPersona(p, c1, c2, sar)) ≡ personasAlta(c, sar)
+        personasAlta(c, pasarDia(sar)) ≡ personasAlta(c, sar) ∪ dia13Cuarentena(personasActual(c, sar), sar)
+
+        dia13Cuarentena(∅, sar) ≡ ∅
+        dia13Cuarentena(personas, sar) ≡ if diasHospedados(dameUno(personas), sar) = 13 
+                                                then { dameUno(personas) } ∪ dia13Cuarentena(sinUno(personas), sar)
+                                                else dia13Cuarentena(sinUno(personas), sar)
+                                         fi 
+        diasHospedado(p, aterrizoVuelo(ps, sar)) ≡ if (p ∈ ps) then 0 else diasHospedado(p, sar)
+        diasHospedado(p, moverPersona(q, c1, c2, sar)) ≡ diasHospedado(p, sar)
+        diasHospedado(p, pasarDia(sar)) ≡ diasHospedado(p, sar) + 1
+
+        centroMasTransitado(sar) ≡ centroMasTransitadoConj(centros(sar), sar)
+        centroMasTransitadoConj(centros, sar) ≡ if #(centros) = 1
+                                            then dameUno(centros)
+                                            else if transito(dameUno(centros)) > transito(centroMasTransitadoConj(sinUno(centros), sar))
+                                                    then transito(dameUno(centros), sar)
+                                                    else centroMasTransitadoConj(sinUno(centros), sar)
+                                                 fi
+                                        fi
+        totalAlta(sar) ≡ totalAltaConj(centros(sar), sar)
+        totalAltaConj(centros, sar) ≡ #(personasAlta(dameUno(centro), sar)) + totalAltaConj(sinUno(centro), sar)
+        seleccionarCentro(cc) ≡ dameUno(cc)
+Fin TAD

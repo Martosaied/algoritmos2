@@ -107,8 +107,8 @@ preinstall:
 # Target rules for target CMakeFiles/truco.dir
 
 # All Build rule for target.
-CMakeFiles/truco.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/truco.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/truco.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/truco.dir/build.make CMakeFiles/truco.dir/depend
 	$(MAKE) -f CMakeFiles/truco.dir/build.make CMakeFiles/truco.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=37,38 "Built target truco"
@@ -135,8 +135,8 @@ CMakeFiles/truco.dir/clean:
 # Target rules for target CMakeFiles/ej15.dir
 
 # All Build rule for target.
-CMakeFiles/ej15.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej15.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej15.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej15.dir/build.make CMakeFiles/ej15.dir/depend
 	$(MAKE) -f CMakeFiles/ej15.dir/build.make CMakeFiles/ej15.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=13,14 "Built target ej15"
@@ -163,8 +163,8 @@ CMakeFiles/ej15.dir/clean:
 # Target rules for target CMakeFiles/ej3.dir
 
 # All Build rule for target.
-CMakeFiles/ej3.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej3.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej3.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej3.dir/build.make CMakeFiles/ej3.dir/depend
 	$(MAKE) -f CMakeFiles/ej3.dir/build.make CMakeFiles/ej3.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=17,18 "Built target ej3"
@@ -191,8 +191,8 @@ CMakeFiles/ej3.dir/clean:
 # Target rules for target CMakeFiles/ej2.dir
 
 # All Build rule for target.
-CMakeFiles/ej2.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej2.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej2.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej2.dir/build.make CMakeFiles/ej2.dir/depend
 	$(MAKE) -f CMakeFiles/ej2.dir/build.make CMakeFiles/ej2.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=15,16 "Built target ej2"
@@ -273,8 +273,8 @@ CMakeFiles/gtest.dir/clean:
 # Target rules for target CMakeFiles/ej9.dir
 
 # All Build rule for target.
-CMakeFiles/ej9.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej9.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej9.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej9.dir/build.make CMakeFiles/ej9.dir/depend
 	$(MAKE) -f CMakeFiles/ej9.dir/build.make CMakeFiles/ej9.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=29,30 "Built target ej9"
@@ -301,8 +301,8 @@ CMakeFiles/ej9.dir/clean:
 # Target rules for target CMakeFiles/libreta.dir
 
 # All Build rule for target.
-CMakeFiles/libreta.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/libreta.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/libreta.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/libreta.dir/build.make CMakeFiles/libreta.dir/depend
 	$(MAKE) -f CMakeFiles/libreta.dir/build.make CMakeFiles/libreta.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=35,36 "Built target libreta"
@@ -329,8 +329,8 @@ CMakeFiles/libreta.dir/clean:
 # Target rules for target CMakeFiles/ej4.dir
 
 # All Build rule for target.
-CMakeFiles/ej4.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej4.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej4.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej4.dir/build.make CMakeFiles/ej4.dir/depend
 	$(MAKE) -f CMakeFiles/ej4.dir/build.make CMakeFiles/ej4.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=19,20 "Built target ej4"
@@ -357,8 +357,8 @@ CMakeFiles/ej4.dir/clean:
 # Target rules for target CMakeFiles/ej5.dir
 
 # All Build rule for target.
-CMakeFiles/ej5.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej5.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej5.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej5.dir/build.make CMakeFiles/ej5.dir/depend
 	$(MAKE) -f CMakeFiles/ej5.dir/build.make CMakeFiles/ej5.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=21,22 "Built target ej5"
@@ -385,8 +385,8 @@ CMakeFiles/ej5.dir/clean:
 # Target rules for target CMakeFiles/ej1.dir
 
 # All Build rule for target.
-CMakeFiles/ej1.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej1.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej1.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej1.dir/build.make CMakeFiles/ej1.dir/depend
 	$(MAKE) -f CMakeFiles/ej1.dir/build.make CMakeFiles/ej1.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target ej1"
@@ -413,8 +413,8 @@ CMakeFiles/ej1.dir/clean:
 # Target rules for target CMakeFiles/ej6.dir
 
 # All Build rule for target.
-CMakeFiles/ej6.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej6.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej6.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej6.dir/build.make CMakeFiles/ej6.dir/depend
 	$(MAKE) -f CMakeFiles/ej6.dir/build.make CMakeFiles/ej6.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=23,24 "Built target ej6"
@@ -441,8 +441,8 @@ CMakeFiles/ej6.dir/clean:
 # Target rules for target CMakeFiles/ej7.dir
 
 # All Build rule for target.
-CMakeFiles/ej7.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej7.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej7.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej7.dir/build.make CMakeFiles/ej7.dir/depend
 	$(MAKE) -f CMakeFiles/ej7.dir/build.make CMakeFiles/ej7.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=25,26 "Built target ej7"
@@ -469,8 +469,8 @@ CMakeFiles/ej7.dir/clean:
 # Target rules for target CMakeFiles/ej8.dir
 
 # All Build rule for target.
-CMakeFiles/ej8.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej8.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej8.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej8.dir/build.make CMakeFiles/ej8.dir/depend
 	$(MAKE) -f CMakeFiles/ej8.dir/build.make CMakeFiles/ej8.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=27,28 "Built target ej8"
@@ -497,8 +497,8 @@ CMakeFiles/ej8.dir/clean:
 # Target rules for target CMakeFiles/ej12.dir
 
 # All Build rule for target.
-CMakeFiles/ej12.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej12.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej12.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej12.dir/build.make CMakeFiles/ej12.dir/depend
 	$(MAKE) -f CMakeFiles/ej12.dir/build.make CMakeFiles/ej12.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=7,8 "Built target ej12"
@@ -525,8 +525,8 @@ CMakeFiles/ej12.dir/clean:
 # Target rules for target CMakeFiles/ej10.dir
 
 # All Build rule for target.
-CMakeFiles/ej10.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej10.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej10.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej10.dir/build.make CMakeFiles/ej10.dir/depend
 	$(MAKE) -f CMakeFiles/ej10.dir/build.make CMakeFiles/ej10.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=3,4 "Built target ej10"
@@ -553,8 +553,8 @@ CMakeFiles/ej10.dir/clean:
 # Target rules for target CMakeFiles/ej11.dir
 
 # All Build rule for target.
-CMakeFiles/ej11.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej11.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej11.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej11.dir/build.make CMakeFiles/ej11.dir/depend
 	$(MAKE) -f CMakeFiles/ej11.dir/build.make CMakeFiles/ej11.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=5,6 "Built target ej11"
@@ -581,8 +581,8 @@ CMakeFiles/ej11.dir/clean:
 # Target rules for target CMakeFiles/ej13.dir
 
 # All Build rule for target.
-CMakeFiles/ej13.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej13.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej13.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej13.dir/build.make CMakeFiles/ej13.dir/depend
 	$(MAKE) -f CMakeFiles/ej13.dir/build.make CMakeFiles/ej13.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=9,10 "Built target ej13"
@@ -609,8 +609,8 @@ CMakeFiles/ej13.dir/clean:
 # Target rules for target CMakeFiles/ej14.dir
 
 # All Build rule for target.
-CMakeFiles/ej14.dir/all: CMakeFiles/gtest.dir/all
 CMakeFiles/ej14.dir/all: CMakeFiles/gtest_main.dir/all
+CMakeFiles/ej14.dir/all: CMakeFiles/gtest.dir/all
 	$(MAKE) -f CMakeFiles/ej14.dir/build.make CMakeFiles/ej14.dir/depend
 	$(MAKE) -f CMakeFiles/ej14.dir/build.make CMakeFiles/ej14.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/martin/Documents/facultad/algoritmos_2/git/ejercitacion_taller_21-4/cmake-build-debug/CMakeFiles --progress-num=11,12 "Built target ej14"

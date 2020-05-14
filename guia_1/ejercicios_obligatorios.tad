@@ -1,0 +1,57 @@
+TAD Rosetree(α)
+    generos rosetree(α)
+    
+    igualdad observacional
+        (∀r1, r2 : rosetree) (r1 =obs r2 ⇐⇒ (raız(r1) =obs raız(r2) ∧ hijos(r1) =obs hijos(r2)))
+
+    observadores basicos
+        raiz : rosetree(α) −→ α
+        hijos : rosetree(α) −→ secu(rosetree(α))
+
+    generadores
+        rose : α × secu(rosetree(α)) −→ rosetree(α)
+    
+    axiomas ∀s: secu(rosetree(α)) ∀a: α
+        raiz(rose(a, s)) ≡ a
+        hijos(rose(a, s)) ≡ s
+Fin TAD
+
+-- Rosetree de chars
+TAD Rosetree(char) extiende Rosetree(α)
+    otras operaciones
+        Ramas : rosetree(α) → secu(secu(α))
+        RamasHijos : secu(rt(α)) −→ secu(secu(α))
+        PrefijarEnTodos: char × secu(secu(char)) → secu(secu(char))
+        BuscarPalabras: rosetree(char) × secu(string) → secu(string)
+        Contenidas: secu(secu(char)) × secu(string) → secu(string) 
+        Contenida: secu(secu(char)) × string → bool
+        MismaPalabra: string × secu(char) → bool
+
+    axiomas ∀s: secu(rosetree(char)) ∀a: char
+        Ramas(r) ≡ if vacıa?(hijos(r)) then <<raiz(r)>> else prefijarEnTodos(raiz(r), ramasHijos(hijos(r)) fi
+        RamasHijos(sr) ≡ if vacıa(sr) then <> else ramas(prim(sr)) & ramasHijos(fin(sr)) fi
+        PrefijarEnTodos(a, s) ≡ if vacía(s) 
+                                    then <>
+                                    else (a • prim(s)) • PrefijarEnTodos(a,fin(s))
+                                fi
+        BuscarPalabras(rs, palabras) ≡ if vacio?(palabras) 
+                                    then <>
+                                    else Contenidas(ramas(rs), palabras)
+                                 fi
+
+        Contenidas(ramas, palabras) ≡ if vacio?(st) 
+                                        then <>
+                                        else if Contenida(ramas, prim(st))
+                                            then prim(st) • Contenidas(rs, fin(st))
+                                            else Contenidas(rs, fin(st))
+                                         fi
+                                      fi
+        Contenida(<>, palabra) ≡ false
+        Contenida(ramas, palabra) ≡ if MismaPalabra(prim(ramas), palabra)
+                                        then true
+                                        else Contenida(fin(ramas), palabra)
+                                    fi
+        MismaPalabra(<>, b) ≡ true
+        MismaPalabra(rama, palabra) ≡ if vacia?(rama) then false else prim(rama) = prim(palabra) ∧ MismaPalabra(fin(rama), fin(palabra)) fi                           
+
+Fin TAD
