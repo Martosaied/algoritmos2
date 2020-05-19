@@ -96,6 +96,7 @@ private:
     Nat length_;
     Nodo *first_;
     Nodo *last_;
+    void delete_all();
 };
 
 #include "Lista.hpp"

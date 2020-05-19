@@ -1,0 +1,32 @@
+-- Practica 3 --
+-- Ejercicio 1 --
+
+Rep: estr → bool
+(∀ e :estr) Rep ≡ (∀ i: nat)(0 <= i < e.inicio → e.elem[i] = 0)
+// No se entiende nada la consigna
+
+
+-- Ejercicio 4 --
+Rep: estr → bool
+(∀ e: estr) Rep ≡   //Esta bien esto? Rep(e.izq) ∧ Rep(e.der) ∧
+                    e.altura = max { e.izq->altura, e.der->altura } + 1 ∧
+                    e.altura
+
+-- Ejercicio 5 --
+(1) entraron es la union de todos los conjuntos
+(2) Para toda persona en colados, tambien debe estar en la fila
+(3) Para toda personas en atendidos, no debe estar en colados ni en fila
+
+-- Asumo axiomatizado ∈ para colas
+
+Rep: estr → bool
+(∀ e: estr) Rep ≡   (1)(∀ p: persona)(p ∈ e.fila ∨ p ∈ e.colados ∨ p ∈ e.atendidos → p ∈ e.entraron) ∧
+                    (2)(∀ p: persona)(p ∈ e.colados → p ∈ e.fila) ∧
+                    (3)(∀ p: persona)(p ∈ e.atendidos → p ∉ e.fila ∧ p ∉ e.colados)
+
+Abs: estr e → fila { Rep(e) }
+Abs(e) ≡ f /    (∀ p: persona)(p ∈ e.colados → SeColo?(p, f) = true) ∧
+                (∀ p: persona)(p ∈ e.fila → Esperando(p, f) = true) ∧
+                (∀ p: persona)(p ∈ e.fila → Posicion(p, f) = //Como me fijo la posicion en la fila? tengo que axiomatizar algo?)
+
+Posicion

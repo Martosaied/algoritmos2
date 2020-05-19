@@ -1,0 +1,32 @@
+-- Guia 2 --
+-- Parte 3 -- 
+-- Ejercicio 3 --
+-- Obligatorio -- 
+
+a)
+(1) Para todo natural contenido en inactivasVacias, no puede estar en el conjunto de tuplas inactivasNoVacias.
+(2) Para toda tupla dentro de inactivasNoVacias, contenido no puede estar vacia.
+(3) Para toda tupla dentro de inactivasNoVacias, nro debe ser diferente.
+(4) seleccionada no puede estar en ninguno de los conjuntos
+(5) Los identificadores de las pestañas de los conjuntos de inactivasNoVacias, inactivasVacias y el seleccionado, 
+    deben ser numeros naturales, consecutivos.
+
+b)
+Rep: estr → bool
+(∀ e :estr) Rep ≡ (1) (∀ i: nat)(i ∈ e.inactivasVacias → (∀ j: nat)((∀ t: tupla<nro: nat, contenido: string>)(t ∈ e.inactivasNoVacias → j ≠ t.nro))) ∧
+                  (2) (∀ t: tupla<nro: nat, contenido: string>)(t ∈ e.inactivasNoVacias → t.contenido ≠ <>) ∧
+                  (3) (∀ t1, t2: tupla<nro: nat, contenido: string>)(t1 ∈ e.inactivasNoVacias ∧ t2 ∈ e.inactivasNoVacias → t1.nro ≠ t2.nro)
+                  (4) (∀ i: nat)(i = e.seleccionada → i ∉ e.inactivasVacias ∧ 
+                                                      (∀ j: nat)((∀ t: tupla<nro: nat, contenido: string>)(t ∈ e.inactivasNoVacias ∧ j ≠ t.nro))) ∧
+                  (5) (∀ i: nat)(0 <= i <= #e.inactivasVacias + #e.inactivasNoVacias + 1 → 
+                                                        i ∈ e.inactivasVacias ∧ 
+                                                        (∃ t: tupla<nro: nat, contenido: string>)(t ∈ e.inactivasNoVacias → i = t.nro))
+c)
+Abs: estr e → editor { Rep(e) }
+Abs(e) ≡ ed /   pestañas(ed) = #e.inactivasVacias + #e.inactivasNoVacias + 1 ∧
+                seleccionada?(ed, e.seleccionada) = true ∧
+                (∀ t: tupla<nro: nat, contenido: string>)(t ∈ e.inactivasNoVacias → texto(ed, t.nro) = t.contenido) ∧
+                texto(ed, e.seleccionada) = e.anteriores • e.posteriores ∧
+                posicionCursor(ed) = long(e.anteriores)
+
+

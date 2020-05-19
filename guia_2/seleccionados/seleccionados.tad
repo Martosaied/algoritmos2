@@ -1,0 +1,54 @@
+-- Guia 2 --
+-- Parte 2.3 --
+-- Ejercicio 1 --
+
+Rep: estr → bool
+(∀ e: estr) Rep ≡ (∀ n: nat)(n = e.grado → long(e.coef) = n + 1 ∧ e.coef[e.grado] ≠ 0)
+
+Abs: estr e → polinomio {Rep(e)}
+Abs(e) ≡ APolinomio(e.grado, e.coef)
+
+APolinomio: grado nat x secu(nat) → polinomio
+APolinomio(g, c . cs) ≡ c * X ** g + APolinomio(cs, g - 1)
+
+evaluar(in p: polinomio, in n: nat, out res: nat)
+{true}
+{res =obs evaluar(p, n)}
+
+iEvaluar(in p: estr, in n: nat) → res: nat
+    i ← 0
+    while(i <= p.grado)
+        res ← res + p.coef[i](n*i)
+    endwhile
+
+
+-- Ejercicio 2 --
+
+Rep: estr → bool
+(∀ e :estr) Rep ≡ (∀ i: nat)(0 ⋜ i < e.long → e.palabra[i] = e.palabra[long - 1 - i]) ∧
+                  long(e.palabra) = e.long
+
+Abs: estr e → palindromo {Rep(e)}
+Abs(e) ≡ c / ver(c) = e.palabra
+
+ver(in p: estr, out res: secu(α))
+{true}
+{res =obs ver(estr)}
+
+
+-- e.palabra solo contiene la mitad --
+Rep: estr → bool
+(∀ e :estr) Rep ≡ (∀ i: nat)(0 ⋜ i < e.long → e.palabra[i] = e.palabra[long - 1 - i]) ∧
+                  long(e.palabra) = e.long / 2(division entera) + e.long % 2 
+
+Abs: estr e → palindromo {Rep(e)}
+Abs(e) ≡ c / ver(c) = e.palabra ⚈ reverso(e.palabra)
+
+ver(in p: estr, out res: secu(α))
+{true}
+{res =obs ver(p)}
+
+
+-- Ejercicio 3 --
+
+

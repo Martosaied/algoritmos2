@@ -1,0 +1,20 @@
+-- Guia 2 --
+-- Parte 3 -- 
+-- Ejercicio 1 --
+-- Obligatorio -- 
+
+funciones polinomiales vs. funciones exponenciales
+
+a) Por induccion, primero demostramos el caso base:
+    1 ⩽ b¹ / b ⪖ 2 → dado que b es ⪖ a 2, P(1) es verdadera
+   
+   Paso Inductivo: Mostrar que si P(k) es verdadera, entonces P(k + 1) es verdadera
+   Se asume que P(k) es verdadera (para un valor no específico de k). Se debe entonces mostrar que P(k + 1) es verdadera:
+   HI: n ⩽ bⁿ
+   
+        n+1 ⩽ bⁿ⁺¹ ↔  n ⪕ bⁿ . b - 1, donde dado que b ⪖ 2, bⁿ . b - 1 > bⁿ, por HI
+        queda demostrado P(k+1)
+
+b) x ⪕ bₓ⁺¹
+
+(Sigue en LaTeX)

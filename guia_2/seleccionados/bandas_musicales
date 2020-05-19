@@ -1,0 +1,22 @@
+Bandas Musicales
+
+Invariante de Representacion
+Pra cualquier conjunto de instrumentos, en los significados de las claves del diccionario, solo se debe corresponder a un unico genero
+Para toda banda dentro del diccionario, banda debe estar en el conjunto de bandar. El genero debe pertenecer a los generos del clasificador y 
+el genero y el conjunto de instrumentos deben estar bien definidos  
+
+
+Rep: estr -> bool
+(∀ e: estr) Rep ≡ (∀ g: genero)(g ∈ estr.generos → g ∈ estr.instrumentosDelGenero.claves ∧ ¬∃ i, j: conj(instrumentos) 
+                                                                                            i ∈ estr.instrumentosDelGenero.significados
+                                                                                            j ∈ estr.instrumentosDelGenero.significados
+                                                                                                → i = j)
+                    ∧ (∀ b: banda)(b ∈ estr.bandas → b ∈ estr.infoBandas.claves ∧ 
+                                    π1(estr.obtener(b)) ∈ estr.bandas ∧
+                                    π2(estr.obtener(b) = instrumentosPorGenero.obtener(π2)))
+
+Abs: estr e → ClasificadorDeBandas {Rep(e)}
+Abs(e) ≡ c / generosMusicales(c) = e.generos ∧ 
+        (∀ g: genero)(g ∈ claves(e.instrumentosPorGenero) → (∀ i: instrumento)(i ∈ obtener(e.instrumentosPorGenero, g) → instrumentosDelGenero(c, g, i) = true))
+        e.bandas = bandas(c) ∧
+        (∀b :Banda)(b ∈ e.bandas ⇒LinstrumentosPorBanda(d, b) = Π1(obtener(e.infoBanda, b)))
