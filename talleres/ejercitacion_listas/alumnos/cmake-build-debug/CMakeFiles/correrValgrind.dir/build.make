@@ -43,10 +43,10 @@ RM = /home/martin/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/201.7223.86/bin
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos
+CMAKE_SOURCE_DIR = /home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos/cmake-build-debug
+CMAKE_BINARY_DIR = /home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos/cmake-build-debug
 
 # Utility rule file for correrValgrind.
 
@@ -71,6 +71,6 @@ CMakeFiles/correrValgrind.dir/clean:
 .PHONY : CMakeFiles/correrValgrind.dir/clean
 
 CMakeFiles/correrValgrind.dir/depend:
-	cd /home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos /home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos /home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos/cmake-build-debug /home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos/cmake-build-debug /home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/correrValgrind.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos /home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos /home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos/cmake-build-debug /home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos/cmake-build-debug /home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/correrValgrind.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/correrValgrind.dir/depend
 

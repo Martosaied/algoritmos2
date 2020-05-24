@@ -1,0 +1,37 @@
+generador
+unir: simcity a x simcity b → simcity c       {(∀c: construccion)(c ∈ (casas(a) ∪ comercios(a) ∪ casas(b) ∪ comercios(b)) ⟹ₗ 
+                                                                                                    ¬estaOcupado(c, mapa(a) ∪ mapa(b))) }				
+
+
+
+
+mapa(unir(sc, sc′)) ≡ unirMapas(mapa(sc), mapa(sc´))
+
+
+observador
+cantPartidasUnidas: simcity → nat
+antigüedad: simcity → nat
+
+antigüedad(nuevaPartida(m)) ≡ 0
+antigüedad(nuevoTurno(casas, coms, sc)) ≡ 1 + antigedad(sc)
+antigüedad(unir(sc, sc´)) ≡ max(antiguedad(sc), antiguedad(sc´)) //entonces unir no cuenta como turno nuevo
+
+cantPartidasUnidas(nuevaPartida(m)) ≡ 0
+cantPartidasUnidas(nuevoTurno(casas, coms, sc)) ≡ cantPartidasUnidas(sc)
+cantPartidasUnidas(unir(sc, sc´)) ≡ 1 + cantPartidasUnidas(sc)
+
+
+PREGUNTAR:
+que significa que no se pueden solapar construcciones de nivel maximo??
+
+
+unirMapas
+m ∪ vacio = m
+m ∪ agregarRioVertical(m´) ≡ agregarRioVertical(m) ∪ m´
+m ∪ agregarRioHorizantal(m´) ≡ agregarRioHorizantal(m) ∪ m´
+
+#necesitamos asegurarnos de que la posicion en la que este el rio que fueramos a mergear en el otro mapa no tenga nada ocupado
+# es decir, que no haya ninguna construccion o rio
+
+
+

@@ -1,6 +1,6 @@
-/home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/gtest.dir
-/home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/correrTests.dir
-/home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/gtest_main.dir
-/home/martin/Documentos/facultad/algoritmos_2/git/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/correrValgrind.dir
+/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/gtest.dir
+/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/correrTests.dir
+/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/gtest_main.dir
+/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion_listas/alumnos/cmake-build-debug/CMakeFiles/correrValgrind.dir

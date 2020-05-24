@@ -15,6 +15,36 @@ a) Por induccion, primero demostramos el caso base:
         n+1 ⩽ bⁿ⁺¹ ↔  n ⪕ bⁿ . b - 1, donde dado que b ⪖ 2, bⁿ . b - 1 > bⁿ, por HI
         queda demostrado P(k+1)
 
-b) x ⪕ bₓ⁺¹
+b)  x ⪕ bˣ⁺¹, ∀ x ∈ R
+    x < [x] + 1
 
 (Sigue en LaTeX)
+
+-- Ejercicio 2 --
+function P(A : arreglo(nat)) -> B : arreglo(nat) {
+    n := tam(A) --> θ(1)
+    M := 0 --> θ(1)
+    for i := 0 to n - 1 { --> n * θ(1)
+        if (A[i] >= n) { --> θ(2)
+            A[i] := 0 --> θ(2)
+        } else { 
+            M := max(M, A[i]) --> θ(3)
+        }
+    }
+    B := nuevo arreglo(nat) indexado desde 0 hasta M inclusive, inicializado en 0 --> θ(1)
+    for i := 0 to M { --> M * θ(1)
+        for j := i to M { --> (m - i)θ(1) --> usamos sumatoria gaussiana --> 
+            B[A[i]] := 1 + B[A[i]] + B[A[j]] --> θ(7)
+        }
+    }
+    return B
+}
+
+Peor caso:
+    En el peor caso, para que el segundo bloque de codigo(los 2 fors) se ejecuten la mayor cantidad de veces
+    M = n - 1, n - 1 es el mayor numero que puede obtener M, cualquier otro numero entraria por la primera parte de la condicion if (A[i] >= n)
+    Entonces un ejemplo de un arreglo que implica mayor tiempo de ejecucion dado un determinado n, es un arreglo donde todas sus posiciones
+    sean iguales a n-1
+
+    Tₚₑₒᵣ(n)  = θ(1) + θ(1) + n * (θ(1) + θ(2) + θ(3)) + θ(1) +  M * θ(1) * (M - i)(θ(1)θ(7))
+              = θ(n) + θ(M²) - θ(M²/2 

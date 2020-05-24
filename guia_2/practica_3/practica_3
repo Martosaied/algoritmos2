@@ -32,4 +32,4 @@ Abs(e) ≡ f /    (∀ p: persona)(p ∈ e.colados → SeColo?(p, f) = true) ∧
                 (∀ p: persona)(p ∈ e.atendidos → FueAtendido?(p, f) = true) ∧
 
 Posicion: α a × cola(α) c → nat  { a ∈ c }
-Posicion(a, c) ≡ if (proximo(c) = a) then 0 else 1 + Posicion(a, desencolar(c))
+Posicion(a, c) ≡ tamaño(c) - if (proximo(c) = a) then 0 else 1 + Posicion(a, desencolar(c))
