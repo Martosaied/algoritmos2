@@ -33,3 +33,62 @@ Abs(e) ≡ f /    (∀ p: persona)(p ∈ e.colados → SeColo?(p, f) = true) ∧
 
 Posicion: α a × cola(α) c → nat  { a ∈ c }
 Posicion(a, c) ≡ tamaño(c) - if (proximo(c) = a) then 0 else 1 + Posicion(a, desencolar(c))
+
+-- Ejercicio 6 --
+
+(1) Todos los presentes deben estar en invitados
+(2) Todos los significados del dicc gruposDe deben estar en presentes
+(3) La interseccion para cualquier par de grupo es vacia
+(4) Para cualquier grupo debe tener un regalo
+(5) El regalo no se puede repetir
+(6) El grupo mas numeroso debe estar en las claves de gruposDe
+(7) El grupo mas numeroso debe ser efectivamente el grupo mas numeroso y si no es el ultimo debe ser el identificador mas pequeño
+
+Rep: estr → bool
+(∀ e: estr) Rep ≡   (1) (∀ p: persona)(esta?(e.presentes, p) →ₗ p ∈ e.invitados) ∧
+                    (2) (∀ g: grupo)((∀ p: persona)(p ∈ obtener(e.gruposDe, grupo) →ₗ esta?(e.presentes, p))) ∧
+                    (3) (∀ g1, g2: grupo)(g1 ∈ claves(e.gruposDe) ∧ g2 ∈ claves(e.gruposDe) ∧ g1 ≠ g2 →ₗ g1 ∩ g2 = ∅) ∧     
+                    (4) (∀ g: grupo)(g ∈ claves(e.gruposDe) →ₗ g ∈ claves(e.regaloDeGrupo))
+                    (5) (∀ g1, g2: grupo)(g1 ∈ claves(e.regaloDeGrupo) ∧ g2 ∈ claves(e.regaloDeGrupo) ∧ g1 ≠ g2 →ₗ 
+                                                                                obtener(e.regaloDeGrupo, g1) ≠ obtener(e.regaloDeGrupo, g2))
+                    (6) e.grupoMasNumeroso ∈ claves(e.gruposDe) ∧ (∀ g: grupo)(g ∈ e.gruposDe →ₗ 
+                                    (#obtener(g, gruposDe) < #obtener(e.grupoMasNumeroso, gruposDe) ∨ 
+                                    (#obtener(g, gruposDe) = #obtener(e.grupoMasNumeroso, gruposDe) ∧ e.grupoMasNumeroso < g)        
+
+Abs: estr e → altafiesta { Rep(e) }
+Abs(e) ≡ af / invitadosPendientes(af) = e.invitados - e.presentes(en la resolucion no esta asi, igualmente no sabria como realizar tal resta pq presentes es una cola)
+              regalos(af) = //buen sabemos hacer esto
+
+
+(Falta implementacion de llegaGrupo)
+
+-- Ejercicio 7 --
+Definimos una otra operacion que me devuelve la cantidad de horas de un proyecto en un mes determinado
+
+sumaDeHorasxMes: dicc<actividad, <proyecto, mes, horas>> × proyecto × horas → nat
+axtiomatizacion pendiente
+
+
+(1) (∀ p: proyecto)((∃ a: actividad)(a ∈ claves(e.detalle) ∧ obtener(a, e.detalles).proy = p) →ₗ 
+                                    (∀ m: mes) obtener(p, e.horasPorMes)[mes] = sumaDeHorasxMes(e.detalle, p, mes)
+(2) ()
+
+No entiendo nada de este Ejercicio kfjaskjdhfakjshdf
+
+-- Ejercicio 8 --
+(1) catPrioritarias debe perteneces a las claves de tramitesXCat
+(2) todas las categorias de los tramites deben pertenecer a las claves de tramitesXCat
+(3) todo tramite debe estar en exactamente un conjunto de tramitesXCat
+(4) Ningun pendPrioritario debe estar en invitadosPendientes
+(5) Todos los pendientes y pendPrioritario deben estar en las claves de tramites
+
+Rep: estr → bool
+Rep(e) ≡    (1) e.catPrioritarias ∈ claves(e.tramitesXCat)
+            (2) (∀ id: id)(id ∈ claves(e.tramites) → obtener(id, e.tramites) ∈ claves(e.tramitesXCat))
+            que paja me da esto mama
+
+Abs: estr e → oficina  { Rep(e) }
+Abs(e) ≡ o \ prioritarias(o) =  c.catPrioritarias ∧ pendientes(o) = e.pendientes ∧ e.pendPrioritarios = pendPrioritarios(o) ∧
+                                (∀ id: id)(id ∈ claves(e.tramites) → obtener(id, e.tramites) = catTram(id, o)) ∧
+                probablemente falta algo con la otra operacion pendPrioritarios 
+
