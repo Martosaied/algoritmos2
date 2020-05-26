@@ -1,21 +1,17 @@
 #include "Lista.h"
 
-template <class T>
-Lista<T>::Lista(): length_(0), first_(nullptr), last_(nullptr) {}
+Lista::Lista(): length_(0), first_(nullptr), last_(nullptr) {}
 
-template <class T>
-Lista<T>::Lista(const Lista& l) : Lista() {
+Lista::Lista(const Lista& l) : Lista() {
     //Inicializa una lista vacía y luego utiliza operator= para no duplicar el código de la copia de una lista.
     *this = l;
 }
 
-template <class T>
-Lista<T>::~Lista() {
+Lista::~Lista() {
     this->delete_all();
 }
 
-template <class T>
-Lista<T>& Lista<T>::operator=(const Lista& aCopiar) {
+Lista& Lista::operator=(const Lista& aCopiar) {
     if (this->length_ != 0) this->delete_all();
     this->length_ = 0;
     for (int i = 0; i < aCopiar.longitud(); ++i) {
@@ -24,8 +20,7 @@ Lista<T>& Lista<T>::operator=(const Lista& aCopiar) {
     return *this;
 }
 
-template <class T>
-void Lista<T>::agregarAdelante(const T& elem) {
+void Lista::agregarAdelante(const int& elem) {
     Nodo* new_nodo = new Nodo();
     new_nodo->data = elem;
     new_nodo->prev = nullptr;
@@ -40,8 +35,7 @@ void Lista<T>::agregarAdelante(const T& elem) {
     this->length_++;
 }
 
-template <class T>
-void Lista<T>::agregarAtras(const T& elem) {
+void Lista::agregarAtras(const int& elem) {
     Nodo* new_nodo = new Nodo();
     new_nodo->data = elem;
     new_nodo->prev = this->last_;
@@ -56,8 +50,7 @@ void Lista<T>::agregarAtras(const T& elem) {
     this->length_++;
 }
 
-template <class T>
-void Lista<T>::eliminar(Nat i) {
+void Lista::eliminar(Nat i) {
     int counter = 0;
     Nodo* node_to_delete = this->first_;
     while(counter < i) {
@@ -86,13 +79,11 @@ void Lista<T>::eliminar(Nat i) {
     this->length_--;
 }
 
-template <class T>
-int Lista<T>::longitud() const {
+int Lista::longitud() const {
     return length_;
 }
 
-template <class T>
-const int& Lista<T>::iesimo(Nat i) const {
+const int& Lista::iesimo(Nat i) const {
     Nodo* selected_nodo = this->first_;
     int counter = 0;
     while (counter < i) {
@@ -102,8 +93,7 @@ const int& Lista<T>::iesimo(Nat i) const {
     return selected_nodo->data;
 }
 
-template <class T>
-int& Lista<T>::iesimo(Nat i) {
+int& Lista::iesimo(Nat i) {
     Nodo* selected_nodo = this->first_;
     int counter = 0;
     while (counter < i) {
@@ -113,13 +103,11 @@ int& Lista<T>::iesimo(Nat i) {
     return selected_nodo->data;
 }
 
-template <class T>
-void Lista<T>::mostrar(ostream& o) {
+void Lista::mostrar(ostream& o) {
     // Completar
 }
 
-template<class T>
-void Lista<T>::delete_all() {
+void Lista::delete_all() {
     while (this->first_ != nullptr) {
         this->eliminar(0);
     }

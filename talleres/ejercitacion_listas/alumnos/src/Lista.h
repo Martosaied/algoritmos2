@@ -8,7 +8,6 @@ using namespace std;
 
 typedef unsigned long Nat;
 
-template <class T>
 class Lista {
 public:
 
@@ -38,13 +37,13 @@ public:
      * Agrega un elemento al principio de la Lista.
      * @param elem elemento a agregar
      */
-    void agregarAdelante(const T& elem);
+    void agregarAdelante(const int& elem);
 
     /**
      * Agrega un elemento al final de la Lista.
      * @param elem elemento a agregar
      */
-    void agregarAtras(const T& elem);
+    void agregarAtras(const int& elem);
 
     /**
      * Elimina el i-ésimo elemento de la Lista.
@@ -89,7 +88,7 @@ public:
 private:
     struct Nodo {
         Nodo* prev;
-        T data;
+        int data;
         Nodo* next;
     };
 
