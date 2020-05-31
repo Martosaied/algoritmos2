@@ -1,6 +1,5 @@
 Decisiones tomadas:
-    - En caso de solaparse un comercio y una construcción, independientemente del nivel, 
-        dejamos la casas (A menos que sea de máximo nivel el comercio, pero ese caso al ser una restricción, nunca sucederó)
+    - En caso de solaparse un comercio y una construcción, independientemente del nivel, dejamos la casas (A menos que sea de máximo nivel el comercio, pero ese caso al ser una restricción, nunca sucederó)
     - Si dos casas se solapan, queda la de mayor nivel
     - Dos simcities no se pueden unir si sus construcciones de mayor nivel están solapadas (es un restricción del generador)
     - La operacion de unión de dos simcity actualiza los niveles según el criterio que definimos y hace que los comercios adquieran el 
@@ -33,7 +32,7 @@ axiomatizacion
 
     cantPartidasUnidas(nuevaPartida(m)) ≡ 0
     cantPartidasUnidas(nuevoTurno(casas, coms, sc)) ≡ cantPartidasUnidas(sc)
-    cantPartidasUnidas(sc ∪ sc´) ≡ 1 + cantPartidasUnidas(sc)
+    cantPartidasUnidas(sc ∪ sc´) ≡ 1 + cantPartidasUnidas(sc) + cantPartidasUnidas(sc')
 
     construccionesMayorNivel(sc) ≡ buscarMayores(casas(sc) ∪ comercios(sc), sc)
 

@@ -92,3 +92,19 @@ Abs(e) ≡ o \ prioritarias(o) =  c.catPrioritarias ∧ pendientes(o) = e.pendie
                                 (∀ id: id)(id ∈ claves(e.tramites) → obtener(id, e.tramites) = catTram(id, o)) ∧
                 probablemente falta algo con la otra operacion pendPrioritarios 
 
+
+-- Ejercicio 9 --
+(1) Todas las alarmas dentro del diccionario de alarmas deben estar encendidas, es decir, debe tener en su conjunto asociado
+    un sensor donde su umbral sea menor a su medicion
+(2) Para todo conjunto de sensores, cada sensor debe tener la alarma dentro de su conjunto y viceversa 
+
+
+Rep: estr → bool
+Rep(e) ≡    (1) (∀ a: alarma)(def?(a, e.alarmas) → (∃ s: sensor)(s ∈ obtener(a, e.alarmas) ∧ obtener(s, e.sensores).umbral < obtener(s, e.sensores).medicion)
+            (2) (∀ s: sensor, a: alarma)(def?(a, e.alarmas) ∧ₗ def?(s, e.sensores) →ₗ s ∈ obtener(a, a.alarmas) ⇔ a ∈ obtener(s, e.sensores))
+
+Abs: estr e → planta { Rep(e) }
+Abs(e) ≡ pl /   (∀ a: alarma)(def?(a, e.alarmas) → esAlarma(pl, a) = true) ∧
+                (∀ s: sensor)(def?(s, e.sensores) → esSensor(pl, s) = true) ∧
+                (∀ a: alarma)(def?(a, e.alarmas) → obtener(a, e.alarmas) = sensoresAlarma(pl, a))
+                blabla para sensores tema umbral y medicion

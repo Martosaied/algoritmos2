@@ -8,14 +8,14 @@ Lista::Lista(const Lista& l) : Lista() {
 }
 
 Lista::~Lista() {
-    this->delete_all();
+    delete_all();
 }
 
 Lista& Lista::operator=(const Lista& aCopiar) {
-    if (this->length_ != 0) this->delete_all();
-    this->length_ = 0;
+    if (length_ != 0) delete_all();
+    length_ = 0;
     for (int i = 0; i < aCopiar.longitud(); ++i) {
-        this->agregarAtras(aCopiar.iesimo(i));
+        agregarAtras(aCopiar.iesimo(i));
     }
     return *this;
 }
@@ -24,35 +24,35 @@ void Lista::agregarAdelante(const int& elem) {
     Nodo* new_nodo = new Nodo();
     new_nodo->data = elem;
     new_nodo->prev = nullptr;
-    new_nodo->next = this->first_;
-    if (this->first_ != nullptr) {
-        this->first_->prev = new_nodo;
+    new_nodo->next = first_;
+    if (first_ != nullptr) {
+        first_->prev = new_nodo;
     }
-    this->first_ = new_nodo;
-    if (this->last_ == nullptr) {
-        this->last_ = new_nodo;
+    first_ = new_nodo;
+    if (last_ == nullptr) {
+        last_ = new_nodo;
     }
-    this->length_++;
+    length_++;
 }
 
 void Lista::agregarAtras(const int& elem) {
     Nodo* new_nodo = new Nodo();
     new_nodo->data = elem;
-    new_nodo->prev = this->last_;
+    new_nodo->prev = last_;
     new_nodo->next = nullptr;
-    if (this->last_ != nullptr) {
-        this->last_->next = new_nodo;
+    if (last_ != nullptr) {
+        last_->next = new_nodo;
     }
-    this->last_ = new_nodo;
-    if (this->first_ == nullptr) {
-        this->first_ = new_nodo;
+    last_ = new_nodo;
+    if (first_ == nullptr) {
+        first_ = new_nodo;
     }
-    this->length_++;
+    length_++;
 }
 
 void Lista::eliminar(Nat i) {
     int counter = 0;
-    Nodo* node_to_delete = this->first_;
+    Nodo* node_to_delete = first_;
     while(counter < i) {
         node_to_delete = node_to_delete->next;
         counter++;
@@ -69,14 +69,14 @@ void Lista::eliminar(Nat i) {
     }
 
     if (i == 0) {
-        this->first_ = next;
+        first_ = next;
     }
-    if (i == this->length_-1) {
-        this->last_ = prev;
+    if (i == length_-1) {
+        last_ = prev;
     }
 
     delete node_to_delete;
-    this->length_--;
+    length_--;
 }
 
 int Lista::longitud() const {
@@ -84,7 +84,7 @@ int Lista::longitud() const {
 }
 
 const int& Lista::iesimo(Nat i) const {
-    Nodo* selected_nodo = this->first_;
+    Nodo* selected_nodo = first_;
     int counter = 0;
     while (counter < i) {
         selected_nodo = selected_nodo->next;
@@ -94,7 +94,7 @@ const int& Lista::iesimo(Nat i) const {
 }
 
 int& Lista::iesimo(Nat i) {
-    Nodo* selected_nodo = this->first_;
+    Nodo* selected_nodo = first_;
     int counter = 0;
     while (counter < i) {
         selected_nodo = selected_nodo->next;
@@ -104,11 +104,14 @@ int& Lista::iesimo(Nat i) {
 }
 
 void Lista::mostrar(ostream& o) {
-    // Completar
+    for (int i = 0; i < length_-1; ++i) {
+        o << iesimo(i) << '\n';
+    }
+    o << iesimo(length_-1);
 }
 
 void Lista::delete_all() {
-    while (this->first_ != nullptr) {
-        this->eliminar(0);
+    while (first_ != nullptr) {
+        eliminar(0);
     }
 }
