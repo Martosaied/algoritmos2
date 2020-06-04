@@ -61,9 +61,10 @@ private:
         Nodo *der;
 
         unsigned int _cant;
-    };
 
-    unsigned int _cardinal(const Nodo *nodo) const;
+        void inOrder(vector<T>& v, int cantAnt);
+        int cantIzq();
+    };
 
     Nodo *_minimo(Nodo *nodo) const;
 

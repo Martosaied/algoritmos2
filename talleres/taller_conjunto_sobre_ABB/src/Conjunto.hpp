@@ -92,16 +92,16 @@ void Conjunto<T>::_remover(const T &clave, Nodo *node) {
         if (node->izq == nullptr && node->der == nullptr) {
             delete node;
         } else if (node->izq == nullptr) {
-            temp = node;
+            temp = node->der;
             node->valor = node->der->valor;
-            node->der = node->der->der;
-            node->izq = node->der->izq;
+            node->der = (node->der) ? node->der->der : NULL;
+            node->izq = (node->der) ? node->der->izq : NULL;
             delete temp;
         } else if (node->der == nullptr) {
-            temp = node;
+            temp = node->izq;
             node->valor = node->izq->valor;
-            node->der = node->izq->der;
-            node->izq = node->izq->izq;
+            node->der = (node->izq) ? node->izq->der : NULL;
+            node->izq = (node->izq) ? node->izq->izq : NULL;
             delete temp;
         }
     }
@@ -109,7 +109,18 @@ void Conjunto<T>::_remover(const T &clave, Nodo *node) {
 
 template<class T>
 const T &Conjunto<T>::siguiente(const T &clave) {
-
+    vector<T> v(_raiz->_cant, 0);
+    _raiz->inOrder(v, 0);
+    int indice = -1;
+    int i = 0;
+    while (indice == -1) {
+        if (v[i] != clave) {
+            i++;
+        } else {
+            indice = i;
+        }
+    }
+    return 6;
 }
 
 template<class T>
@@ -144,14 +155,6 @@ unsigned int Conjunto<T>::cardinal() const {
 }
 
 template<class T>
-unsigned int Conjunto<T>::_cardinal(const Nodo *nodo) const {
-    if (nodo == nullptr) {
-        return 0;
-    }
-    return 1 + _cardinal(nodo->izq) + _cardinal(nodo->der);
-}
-
-template<class T>
 void Conjunto<T>::mostrar(std::ostream &) const {
     assert(false);
 }
@@ -179,7 +182,19 @@ void Conjunto<T>::_vaciar(Conjunto::Nodo *node) {
 }
 
 template<class T>
-Conjunto<T>::Nodo::Nodo(const T &v): valor(v), izq(nullptr), der(nullptr) {}
+Conjunto<T>::Nodo::Nodo(const T &v): valor(v), izq(nullptr), der(nullptr), _cant(0) {}
 
+template<class T>
+void Conjunto<T>::Nodo::inOrder(vector<T> &v, int cantAnt) {
+    int indice = cantIzq() + cantAnt;
+    v[indice] = valor;
 
+    if (izq != nullptr) izq->inOrder(v, cantAnt);
+    if (der != nullptr) der->inOrder(v, indice + 1);
+}
 
+template<class T>
+int Conjunto<T>::Nodo::cantIzq() {
+    if (izq == nullptr) return 0;
+    return izq->_cant+1;
+}
