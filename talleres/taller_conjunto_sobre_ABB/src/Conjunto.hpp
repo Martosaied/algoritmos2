@@ -7,6 +7,7 @@ Conjunto<T>::Conjunto(): _raiz(nullptr) {}
 template<class T>
 Conjunto<T>::~Conjunto() {
     _vaciar(_raiz);
+    _raiz = nullptr;
 }
 
 template<class T>
@@ -32,16 +33,16 @@ bool Conjunto<T>::pertenece(const T &clave) const {
 
 template<class T>
 void Conjunto<T>::insertar(const T &clave) {
-    if (pertenece(clave)) {
-        return;
-    }
-
     Nodo *newNodo = new Nodo(clave);
-
     if (_raiz == nullptr) {
         _raiz = newNodo;
         _raiz->_cant = 1;
     }
+
+    if (pertenece(clave)) {
+        return;
+    }
+
 
     Nodo *nextNodo = _raiz;
     while (nextNodo != newNodo) {
@@ -72,6 +73,9 @@ void Conjunto<T>::remover(const T &clave) {
 
 template<class T>
 void Conjunto<T>::_remover(const T &clave, Nodo *node) {
+    if (clave == _raiz->valor && _raiz->izq == nullptr && _raiz->der == nullptr) {
+        _raiz = nullptr;
+    }
     Nodo *temp;
     node->_cant--;
     if (node == nullptr)
@@ -99,7 +103,6 @@ void Conjunto<T>::_remover(const T &clave, Nodo *node) {
             node->der = node->izq->der;
             node->izq = node->izq->izq;
             delete temp;
-
         }
     }
 }
@@ -167,12 +170,12 @@ typename Conjunto<T>::Nodo *Conjunto<T>::_maximo(Conjunto::Nodo *nodo) const {
 
 template<class T>
 void Conjunto<T>::_vaciar(Conjunto::Nodo *node) {
-    if (node == nullptr) {
-        return;
+    if (node != nullptr) {
+        _vaciar(node->izq);
+        _vaciar(node->der);
+        delete node;
     }
-    _vaciar(node->izq);
-    _vaciar(node->der);
-    delete node;
+
 }
 
 template<class T>
