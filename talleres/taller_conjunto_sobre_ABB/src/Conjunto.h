@@ -29,7 +29,7 @@ public:
     void remover(const T &);
 
     // Siguiente elemento al recibido por párametro, en orden.
-    const T &siguiente(const T &elem);
+    const T& siguiente(const T &elem);
 
     // Devuelve el mínimo elemento del conjunto según <.
     const T &minimo() const;
@@ -70,9 +70,11 @@ private:
 
     Nodo *_maximo(Nodo *nodo) const;
 
-    void _remover(const T &clave, Nodo* node);
+    Nodo *_remover(const T &clave, Nodo* node);
 
     void _vaciar(Nodo* node);
+
+    Nodo *_obtenerNodo(const T &clave);
 
     // Puntero a la raíz de nuestro árbol.
     Nodo *_raiz;

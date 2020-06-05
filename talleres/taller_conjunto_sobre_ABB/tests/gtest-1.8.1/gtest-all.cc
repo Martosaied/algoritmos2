@@ -3888,7 +3888,7 @@ Result HandleSehExceptionsInMethodIfSupported(
     // creation of objects with destructors on stack in functions using __try
     // (see error C2712).
     std::string* exception_message = FormatSehExceptionMessage(
-        GetExceptionCode(), location);
+        GetExceptionCode(), lo_raizcation);
     internal::ReportFailureInUnknownLocation(TestPartResult::kFatalFailure,
                                              *exception_message);
     delete exception_message;

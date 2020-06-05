@@ -5,6 +5,9 @@ template<class T>
 Conjunto<T>::Conjunto(): _raiz(nullptr) {}
 
 template<class T>
+Conjunto<T>::Nodo::Nodo(const T &v): valor(v), izq(nullptr), der(nullptr), _cant(0) {}
+
+template<class T>
 Conjunto<T>::~Conjunto() {
     _vaciar(_raiz);
     _raiz = nullptr;
@@ -68,59 +71,27 @@ void Conjunto<T>::insertar(const T &clave) {
 
 template<class T>
 void Conjunto<T>::remover(const T &clave) {
+    if (_raiz->valor == clave && _raiz->izq == nullptr && _raiz->der == nullptr) {
+        delete _raiz;
+        _raiz = nullptr;
+        return;
+    }
     _remover(clave, _raiz);
 }
 
 template<class T>
-void Conjunto<T>::_remover(const T &clave, Nodo *node) {
-    if (clave == _raiz->valor && _raiz->izq == nullptr && _raiz->der == nullptr) {
-        _raiz = nullptr;
-    }
-    Nodo *temp;
-    node->_cant--;
-    if (node == nullptr)
-        return;
-    else if (clave < node->valor)
-        _remover(clave, node->izq);
-    else if (clave > node->valor)
-        _remover(clave, node->der);
-    else if (node->izq && node->der) {
-        temp = _minimo(node->der);
-        node->valor = temp->valor;
-        _remover(node->valor, node->der);
-    } else {
-        if (node->izq == nullptr && node->der == nullptr) {
-            delete node;
-        } else if (node->izq == nullptr) {
-            temp = node->der;
-            node->valor = node->der->valor;
-            node->der = (node->der) ? node->der->der : NULL;
-            node->izq = (node->der) ? node->der->izq : NULL;
-            delete temp;
-        } else if (node->der == nullptr) {
-            temp = node->izq;
-            node->valor = node->izq->valor;
-            node->der = (node->izq) ? node->izq->der : NULL;
-            node->izq = (node->izq) ? node->izq->izq : NULL;
-            delete temp;
-        }
-    }
-}
-
-template<class T>
 const T &Conjunto<T>::siguiente(const T &clave) {
-    vector<T> v(_raiz->_cant, 0);
+    vector<T> v(_raiz->_cant);
     _raiz->inOrder(v, 0);
-    int indice = -1;
     int i = 0;
-    while (indice == -1) {
-        if (v[i] != clave) {
-            i++;
-        } else {
-            indice = i;
+    while (i < v.size()) {
+        if (v[i] == clave) {
+            break;
         }
+        i++;
     }
-    return 6;
+    Nodo* nodo = _obtenerNodo(v[i+1]);
+    return nodo->valor;
 }
 
 template<class T>
@@ -132,20 +103,6 @@ const T &Conjunto<T>::minimo() const {
 template<class T>
 const T &Conjunto<T>::maximo() const {
     return _maximo(_raiz)->valor;
-}
-
-
-template<class T>
-typename Conjunto<T>::Nodo *Conjunto<T>::_minimo(Nodo *nodo) const {
-    if (nodo == nullptr) {
-        return 0;
-    }
-
-    if (nodo->izq == nullptr) {
-        return nodo;
-    }
-
-    return _minimo(nodo->izq);
 }
 
 template<class T>
@@ -172,6 +129,19 @@ typename Conjunto<T>::Nodo *Conjunto<T>::_maximo(Conjunto::Nodo *nodo) const {
 }
 
 template<class T>
+typename Conjunto<T>::Nodo *Conjunto<T>::_minimo(Nodo *nodo) const {
+    if (nodo == nullptr) {
+        return 0;
+    }
+
+    if (nodo->izq == nullptr) {
+        return nodo;
+    }
+
+    return _minimo(nodo->izq);
+}
+
+template<class T>
 void Conjunto<T>::_vaciar(Conjunto::Nodo *node) {
     if (node != nullptr) {
         _vaciar(node->izq);
@@ -182,10 +152,54 @@ void Conjunto<T>::_vaciar(Conjunto::Nodo *node) {
 }
 
 template<class T>
-Conjunto<T>::Nodo::Nodo(const T &v): valor(v), izq(nullptr), der(nullptr), _cant(0) {}
+typename Conjunto<T>::Nodo *Conjunto<T>::_remover(const T &clave, Conjunto::Nodo *node) {
+    if (node == NULL) return node;
+    node->_cant--;
+    if (clave < node->valor)
+        node->izq = _remover(clave, node->izq);
+    else if (clave > node->valor)
+        node->der = _remover(clave, node->der);
+    else{
+        if (node->izq == NULL){
+            Nodo *temp = node->der;
+            delete node;
+            return temp;
+        }
+        else if (node->der == NULL){
+            Nodo *temp = node->izq;
+            delete node;
+            return temp;
+        }
+        Nodo* temp = _minimo(node->der);
+        node->valor = temp->valor;
+        node->der = _remover(temp->valor, node->der);
+    }
+    return node;
+}
 
 template<class T>
-void Conjunto<T>::Nodo::inOrder(vector<T> &v, int cantAnt) {
+typename Conjunto<T>::Nodo *Conjunto<T>::_obtenerNodo(const T &clave) {
+    if (_raiz == nullptr) {
+        return nullptr;
+    }
+
+    Nodo *nextNodo = _raiz;
+    while (nextNodo != nullptr) {
+        if (nextNodo->valor == clave) {
+            return nextNodo;
+        }
+
+        if (nextNodo->valor > clave) {
+            nextNodo = nextNodo->izq;
+        } else {
+            nextNodo = nextNodo->der;
+        }
+    }
+    return nullptr;
+}
+
+template<class T>
+void Conjunto<T>::Nodo::inOrder(vector<T>& v, int cantAnt) {
     int indice = cantIzq() + cantAnt;
     v[indice] = valor;
 
@@ -198,3 +212,4 @@ int Conjunto<T>::Nodo::cantIzq() {
     if (izq == nullptr) return 0;
     return izq->_cant+1;
 }
+
