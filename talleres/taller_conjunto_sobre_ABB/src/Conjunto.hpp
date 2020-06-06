@@ -39,10 +39,11 @@ void Conjunto<T>::insertar(const T &clave) {
     Nodo *newNodo = new Nodo(clave);
     if (_raiz == nullptr) {
         _raiz = newNodo;
-        _raiz->_cant = 1;
+        return;
     }
 
     if (pertenece(clave)) {
+        delete newNodo;
         return;
     }
 
@@ -81,7 +82,7 @@ void Conjunto<T>::remover(const T &clave) {
 
 template<class T>
 const T &Conjunto<T>::siguiente(const T &clave) {
-    vector<T> v(_raiz->_cant);
+    vector<T> v(_raiz->_cant+1);
     _raiz->inOrder(v, 0);
     int i = 0;
     while (i < v.size()) {
@@ -91,6 +92,7 @@ const T &Conjunto<T>::siguiente(const T &clave) {
         i++;
     }
     Nodo* nodo = _obtenerNodo(v[i+1]);
+    v.clear();
     return nodo->valor;
 }
 
@@ -108,7 +110,7 @@ const T &Conjunto<T>::maximo() const {
 template<class T>
 unsigned int Conjunto<T>::cardinal() const {
     if (_raiz == nullptr) return 0;
-    return _raiz->_cant;
+    return _raiz->_cant + 1;
 }
 
 template<class T>
@@ -148,31 +150,38 @@ void Conjunto<T>::_vaciar(Conjunto::Nodo *node) {
         _vaciar(node->der);
         delete node;
     }
-
 }
 
 template<class T>
 typename Conjunto<T>::Nodo *Conjunto<T>::_remover(const T &clave, Conjunto::Nodo *node) {
     if (node == NULL) return node;
-    node->_cant--;
+    if(node->_cant != 0) node->_cant--;
     if (clave < node->valor)
         node->izq = _remover(clave, node->izq);
     else if (clave > node->valor)
         node->der = _remover(clave, node->der);
     else{
-        if (node->izq == NULL){
+        bool removerRaiz = false;
+        if (clave == _raiz->valor) removerRaiz = true;
+        if (node->izq == NULL && node->der == NULL) {
+            delete node;
+            return NULL;
+        } else if (node->izq == NULL){
             Nodo *temp = node->der;
             delete node;
+            if (removerRaiz) _raiz = temp;
             return temp;
         }
         else if (node->der == NULL){
             Nodo *temp = node->izq;
             delete node;
+            if (removerRaiz) _raiz = temp;
             return temp;
         }
         Nodo* temp = _minimo(node->der);
         node->valor = temp->valor;
         node->der = _remover(temp->valor, node->der);
+        if (removerRaiz) _raiz = node;
     }
     return node;
 }
