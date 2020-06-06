@@ -1,0 +1,150 @@
+-- Ejercicio 10 --
+Modulo Cola
+Se explica con: TAD Cola
+Generos: cola
+
+Operaciones
+
+
+-- Ejercicio 11 --
+-- Ejercicio 12 --
+Interfaz
+Modulo Conjunto de naturales en Rango
+Se explica con: TAD Conjunto de naturales en Rango
+Generos: conjenrango
+
+Operaciones:
+    Pertenece(in n: nat, in c: conjenrango) → res: bool
+        Pre: { true }
+        Post: { res =obs n ∈ c }
+        Complejidad: O(upper(c) - lower(c))
+        Descripcion: true si el elemento n pertenece al conjutno en rango c
+
+    Lower(in c: conjenrango) → res: nat
+        Pre: { true }
+        Post: { res =obs lower(c) }
+        Complejidad: ?
+        Descripcion: Devuelve n, tal que n es la cota inferior del Conjunto
+        Aliasing: n es devuelto por copia
+
+    Upper(in c: conjenrango) → res: nat
+        Pre: { true }
+        Post: { res =obs upper(c) }
+        Complejidad: ?
+        Descripcion: Devuelve n, tal que n es la cota superior del Conjunto
+        Aliasing: m es devuelto por copia
+    
+    Vacio(in n: nat, in m: nat) → res: conjenrango
+        Pre: { n ≤ m }
+        Post: { res =obs vacio(n, m) }
+        Complejidad: ?
+        Descripcion: genera Conjunto vacio con cotas
+        Aliasing: Res es una referencia modificable 
+
+    Agregar(in a: nat, inout c: conjenrango)
+        Pre: { c = c₀ ∧ₗ lower(c) ≤ a ≤ upper(c) }
+        Post: { c = Ag(a , c₀) }
+        Complejidad: ?
+        Descripcion: agrega valor al conjunto
+        Aliasing: a es agregado por copia al conjunto
+
+Representacion
+    conjenrango se representa con estr
+        donde cenr es tupla(
+            minimo: nat,
+            elementos: arreglo_dimensionable(bool)
+        )
+    
+    Rep: estr c → bool
+    Rep(c) ≡ true //Ni idea bro, pero creo que esta bien
+    
+    Abs: estr e → conjenrango
+    Abs(e) ≡ c | e.minimo = lower(c) ∧ long(e.elementos) = upper(c) - lower(c) + 1
+                            (∀ n: nat)(lower(c) ≤ n ≤ upper(c) →ₗ pertenece(n, c) ↔ e.elementos[n])
+
+-- Ejercicio 13 -- 
+
+Hecho en la teorica, se usaria un conjenrango para los elementos pertenecientes entre lower y upper y un conjunto lineal para el resot
+
+-- Ejercicio 14 --
+
+Representacion
+    Rosetree(α) se representa con estr
+        donde estr es tupla(
+            raiz: α,
+            hijos: secuencia(punteros(rosetree(α))) --> entendiendo que secuencia no es un "modulo" sino que lo teenemos defenidino como tad, y nosotros 
+                                                        definimos los estr con modulos, que es secuencia? en la practica lo usan pero en el apunte de
+                                                        modulos usa lista especificamente
+        )
+
+    Rep: estr e → bool
+    Rep(c) ≡ true ⇔ (∀ hijo: rosetree)(esta?(hijo, e.hijos) → Rep(hijo)) ∧
+                    // Que no haya ciclos mastercard, visa electron
+    abs es bobo --> esto es de pato, señor google cuando veas mi github esto no es mio!
+
+-- Ejercicio 15 --
+
+si el chabon pregunta def(clave), me guardo el signfivadokjsdflahsgf si existe
+si despues el chabon accede, y la clave es la misma, PAM O(1)
+
+Representacion
+ DiccionarioVivo(k, σ) se representa con estr
+        donde estr es tupla(
+            dicc: dicc(k, σ),
+            itUlt: itDic // comentario de pato: eat ma fakin dick
+        )
+
+        #cuandoalguiendicealgoquenotecaebien
+        yo: itDic
+
+    Rep: estr e → bool
+    Rep(e) ≡ true ⇔ Rep(e.dicc) ∧ Rep(itDic)
+
+    Abs: estr e → dicc
+    Abs(e) ≡ d | Abs(e.dicc) ∧ₗ (∃ clave: K)(def?(clave, d) ∧ₗ hay siguiente yluego siguiente(itUlt) = obtener(clave, d)) //y fue la ultima jejox,? como podriamos definir la logica para la ultima def? que hice
+
+-- Ejercicio 16 --
+Representacion
+ Multiconjunto(α) se representa con estr
+        donde estr es dicc(α, nat)
+
+        #include dicc
+
+        Vac ́ıo, que devuelve un multiconjunto sin elementos.
+        iVacio() → res: multi
+            res  ← Vacio()
+            Complejidad: O(1)
+        , que agrega una sola repetici ́on del elemento indicado.
+        iAgregar(in/out multi, in clave: α)
+            if (Definido?(multi, clave)) {
+                Definir(multi, Signifacado(multi, clave) + 1)
+            } else {
+                Definir(multi, 1)
+            }
+            Complejidad: O(Definido? + Definir)
+
+        Eliminar, que elimina una sola repetici ́on del elemento indicado.
+        if (Definido(multi, clave)) {
+                if(Significado(multi, clave) == 1){
+                    Borrar(multi, clave)
+                } else {
+                    Definir(multi, Signifacado(multi, clave) - 1)
+                }
+            }
+        #Repeticiones, que devuelve la cantidad de repeticiones del elemento indicado que hay en el multiconjunto
+        if (Definido(multi, clave)) {
+                return significado 
+            } else {
+                return 0;
+            }
+
+-- Ejercicio 17 --
+    Representacion
+        Secundario se representa con estr
+        donde estr es dicc(alumno, tupla(notas: multiconjunto(nat), faltas: nat))
+
+    Rep: estr e → bool
+    Rep(e) ≡ true
+
+    Abs: estr e → dicc
+    Abs(e) ≡ sec |  SI SI SI BOLUDO SI SI DALE

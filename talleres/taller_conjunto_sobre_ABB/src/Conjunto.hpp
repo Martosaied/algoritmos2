@@ -72,6 +72,7 @@ void Conjunto<T>::insertar(const T &clave) {
 
 template<class T>
 void Conjunto<T>::remover(const T &clave) {
+    //PREGUNTAR SI PERTENECE ANTES
     if (_raiz->valor == clave && _raiz->izq == nullptr && _raiz->der == nullptr) {
         delete _raiz;
         _raiz = nullptr;
