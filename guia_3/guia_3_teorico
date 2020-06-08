@@ -60,3 +60,20 @@ Representacion
         
         Abs: estr e → matfin m
         Abs(e) ≡ m | e.filas = #filas(m) ∧ e.columnas = #columnas(m) ∧ (∀ i,j: nat)(i ≤ e.filas ∧ j ≤ e.columnas → Obtener(<i,j>, e.matriz) = obtener(<i,j>, m))
+
+-- Ejercicio 2 --
+
+iInterseccion(in a: conj, in b: conj) → res: conj {
+    i ← 0
+    res ← vacia()
+    while i < longitud(a) {
+        while j < longitud(b) {
+            if a[i] = b[j] {
+                agregarAdelante(res,a[i])
+            }
+            j++
+        }
+        i++
+    }
+    devolver res
+}
