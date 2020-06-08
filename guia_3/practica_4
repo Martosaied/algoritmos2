@@ -1,0 +1,44 @@
+-- Practica 4 --
+-- Ejercicio 1 --
+Interfaz
+Modulo Multiconjunto
+Parametros Formales
+    generos α
+
+Se explica con TAD Multiconjunto
+Generos multiconj
+
+Operaciones
+    Count(in elem: α, in mc: multiconj) → res: nat
+        Pre: { true }
+        Post: { res =obs #(elem, mc) }
+        Complejidad: O(n)
+
+    Vacio() → res: multiconj
+        Pre: { true }
+        Post: { (∀ e: α)(#(e, res) = 0) }
+        Complejidad: O(1)
+        Aliasing: Devuelve un multiconj por referencia
+
+    Agregar(in elem: α, inout mc: multiconj)
+        Pre: { mc = mc0 ∧ true }
+        Post: { #(elem, mc) = #(elem, mc0) + 1 }
+        Complejidad: O(1)
+    
+    Borrar(in elem: α, inout mc: multiconj)
+        Pre: { mc = mc0 ∧ true }
+        Post: { (#(elem, mc0) ≥ 1 ∧ #(elem, mc) = #(elem, mc0) - 1)
+                ∨ (#(elem, mc0) = 0 ∧ #(elem, mc0) = #(elem, mc) }
+        Complejidad: O(n)
+    
+    ...
+    faltan Operaciones
+Representacion
+    Multiconjunto(α) se representa con estr
+        donde estr es lista(α)
+
+    Rep: estr e → bool
+    Rep(e) ≡ true
+    
+    Abs: estr e → multiconj
+    Abs(e) ≡ if e = Vacia() then ∅ else Ag(Primero(e), Abs(Fin(e)))

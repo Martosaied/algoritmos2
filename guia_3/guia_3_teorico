@@ -1,0 +1,62 @@
+-- Guia 3 --
+-- Ejercicio 1 --
+-- Matriz Finita --
+
+Interfaz
+Modulo Matriz Finita
+Se explica con: TAD Matriz Finita
+Generos: matfin
+
+SumarMatrices(Crear(n, m), mat) ≡ mat
+SumarMatrices(Definir(n, m, valor, mat´), mat) ≡ SumarMatrices(mat´, Definir(n, m, Obtener(n, m) + valor, mat))
+
+Operacion
+    Crear(in altura: nat, in ancho: nat) → res: matfin
+        Pre: { true }
+        Post: { res =obs crear(altura, ancho) }
+        Complejidad: #NiUnaMenos
+        Descripcion: Devuelve una matriz vacia de altura x ancho posiciones
+        Aliasing: Res es una referencia modificable
+
+    Definir(in cord: tupla<x: nat, y:nat>, in valor: nat ,inout mat: matfin)
+        Pre: { mat = mat₀ ∧ cord.x ≤ #columnas(mat) ∧ cord.y ≤ #filas(mat) }
+        Post: { mat[cord.x][cord.y]//abuso de notacion = valor }
+        Complejidad: Θ(n)
+        Descripcion: Defino el valor valor en la coordenada dada de la matriz
+
+    Filas(in mat: matfin) → res: nat
+        Pre: { true }
+        Post: { res =obs #filas(mat --> MARTO LÑA CONCHA ED TU AMDRE ACA VA SOMBREROVICH) } \widehat_{adasd} 
+        Complejidad: O(1)
+        Descripcion: Devuelve la cantidad de filas
+
+
+    Columnas(in mat: matfin) → res: nat
+        Pre: { true }
+        Post: { res =obs #columnas(mat --> MARTO LÑA CONCHA ED TU AMDRE ACA VA SOMBREROVICH) }
+        Complejidad: O(1)
+        Descripcion: Devuelve la cantidad de columnas
+
+    Obtener(in cord: tupla<x: nat, y:nat>, in mat: matfin) → res: nat
+        Pre: { mat = mat₀ ∧ cord.x ≤ #columnas(mat) ∧ cord.y ≤ #filas(mat) }
+        Post: { ¬definido(mat, cord) → res = 0 ∧ definido(mat, cord) → res = obtener(mat, cord) }
+        Complejidad: O(n)
+
+    SumarMatrices(inout a: matfin, in b: matfin)
+        Pre: { filas(a) = filas(b) ∧ columnas(a) = columnas(b) }
+        Post: { //alta paja }
+
+Representacion
+        conjenrango se representa con estr
+        donde estr es tupla<matriz: dicc(
+                tupla<nat, nat>,
+                nat,
+            ),
+            filas: nat,
+            columnas: nat>
+
+        Rep: estr e → bool 
+        Rep(e) ≡ true ⇔ (∀ t: tupla<nat, nat>)(t ∈ claves(e.dicc) =>l π1(t) ≤ e.columnas ∧ π2(t) ≤ e.filas)
+        
+        Abs: estr e → matfin m
+        Abs(e) ≡ m | e.filas = #filas(m) ∧ e.columnas = #columnas(m) ∧ (∀ i,j: nat)(i ≤ e.filas ∧ j ≤ e.columnas → Obtener(<i,j>, e.matriz) = obtener(<i,j>, m))
