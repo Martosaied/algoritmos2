@@ -107,3 +107,28 @@ faltan tries y heaps
 
 -- Ejercicio 4 --
 Decidimos que podíamos usar una hash table para la matriz infinita con tuplas que almacenen las direcciones
+
+-- Ejercicio 5 --
+matriz finita ya lo hicimos
+
+-- Ejericio 6 --
+Interfaz
+Modulo Diccionario con historia
+Parametros Formales
+    generos k, σ
+
+Se explica con TAD Diccionario con historia
+Generos diccHist
+
+Operaciones
+    Definido?(in clave: k, in dc: diccHist) → res: bool
+        Pre: { true }
+        Post: { res =obs Definido?(k, diccHist) }
+        Complejidad: O(n)
+
+    CantSignificado(in clave: k, in dc: diccHist) → res: nat
+        Pre: { Definido?(clave, dc) }
+        Post: { res =obs CantSignificado(clave, dc) }
+        Complejidad: O(n)
+
+-- malardo ejercicio, creo que teniendo de estr un diccionario con significado una tupla(σ, nat) es trivial, me piden todo en O(n) 
