@@ -42,3 +42,68 @@ Representacion
     
     Abs: estr e → multiconj
     Abs(e) ≡ if e = Vacia() then ∅ else Ag(Primero(e), Abs(Fin(e)))
+
+-- Ejercicio 2 --
+Lista enlazada no ordenada
+iInterseccion(in a: conj, in b: conj) → res: conj {
+    i ← 0
+    res ← vacia()
+    while i < longitud(a) {
+        while j < longitud(b) {
+            if a[i] = b[j] {
+                agregarAdelante(res,a[i])
+            }
+            j++
+        }
+        i++
+    }
+    devolver res
+}
+
+Lista enlazada ordenada
+iInterseccion(in a: conj, in b: conj) → res: conj {
+    i ← 0
+    res ← vacia()
+    while i < longitud(a) {
+        while j < longitud(b) {
+            if a[i] = b[j] {
+                agregarAdelante(res,a[i])
+            }
+            j++
+        }
+        i++
+    }
+    devolver res
+}
+
+-- Seguir dsp el 2
+
+-- Ejercicio 3 --
+Lista enlazada
+Insertar O(1)
+Borrar O(n)
+Busqueda minimo O(n) 
+Borrado del minimo O(n)
+
+Lista enlazada ordenada
+Insertar O(log n)
+Borrar O(log n)
+Busqueda minimo O(log n) 
+Borrado del minimo O(log n)
+
+ABB
+Insertar O(n) y caso promedio O(log n)
+Borrar O(n) 
+Busqueda minimo O(log n) 
+Borrado del minimo O(log n)
+
+AVL
+Insertar O(log n)
+Borrar O(log n)
+Busqueda minimo O(log n) 
+Borrado del minimo O(log n)
+
+faltan tries y heaps
+
+-- Ejercicio 4 --
+Decidimos que podíamos usar una hash table para la matriz infinita con tuplas que almacenen las direcciones
