@@ -1,0 +1,109 @@
+-- Ejercicio 2 --
+Representacion
+    IngresosAlBanco se representa con estr
+        donde estr es lista_enlazada(nat)
+
+    Un vector donde el indice de un determinado numero es el dia, y el valor guardado en dicha posicion es la acumulacion de ingresantes
+    desde el primer dia hasta esa posicion, de esta forma, cantPersonas es O(1) ya que es solo hacer e[i] - e[j] con i y j intervalo de dias.
+
+    Rep: estr e → bool
+    Rep(e) ≡ (∀ i: nat)(0 ≤ i < long(e) - 1 →l e[i+1] ≥ e[i])
+    
+    Abs: estr e → iab
+    Abs(e) ≡ i |    totDias(i) = long(e) ∧
+                    (∀ d,h: nat)(1 ≤ d ≤ h ∧ h ≤ totDias(i) → cantPersonas(i, d, h) = e[h] - e[d]
+
+-- Ejercicio 3 --
+Volvemos a hacer el de ranking dsp de ver la practica de iteradores reveladora
+Solucion del PDF
+
+Representacion
+    Torneo se representa con estr
+        donde estr es tupla(equipos: diccAVL(equipo, itLista),
+                            posiciones: lista(tupla(posicion: nat, puntaje:nat, cantEquipos: nat)))
+
+
+
+
+    1 3 3p
+    2 3 2p
+
+    1 2 5p
+    3 1 4p
+    5 2 3p
+
+    
+    iPuntos(in t: torneo, in e: equipo) → res: nat 
+        itLista ← Obtener(torneo.equipos, equipo)
+        res ← itLista.siguiente().puntaje
+
+    iPosicion(in t: torneo, in e: equipo) → res: nat
+        itLista ← Obtener(torneo.equipos, equipo)
+        res ← itLista.siguiente().posicion
+
+    iRegPartido(in t: torneo, in e: equipo) 
+        itLista ← Obtener(torneo, equipo) //O(log n)
+        nodoActual ← Siguiente(itLista)
+        if nodoActual.cantEquipos == 1
+            EliminarSiguiente(itLista)
+        else 
+            nodoActual.cantEquipos--
+            nodoActual.posicion++
+        endif
+        if HayAnterior(itLista) ∧ Anterior(itLista).puntaje == nodoActual.puntaje + 1
+            nodoAnterior ← Anterior(itLista)
+            nodoAnterior.cantEquipos++
+            definir(equipo, Retroceder(itLista), t.equipos) //O(log n), podria ser O(1)
+        else 
+            //Si primero solo hay un equipo es un caso especial
+            nuevoNodo ← <nodoActual.posicion--,nodoActual.puntaje+1,1>
+            AgregarComoAnterior(itLista, nuevoNodo)
+        endif 
+
+-- Ejercicio 4 --
+Representacion
+    AED2Company se representa con estr
+        donde estr es tupla(Lineas: diccLog(Linea, conj(celdas)), Universidades: diccLog(Universidad, celda), Celdas: vector(vector(tupla(lineas, universidades)))))
+
+    Para Agregar/Eliminar universidades: Primero se obtiene en log(U) la celda, 
+                                        se obtiene el conjunto de U de dicha celda en O(1) u luego se elimina de dicho conjunto en a lo sumo O(log u) 
+                                        para dsp eliminar del diccLog de universidades
+    
+    Para Agregar/Eliminar lineas: lo mismo que arriba pero se tiene que iterar sobre el conjunto de lineas por las que pasa mi linea a eliminar
+
+    Para obtener lineas por universidad: busco la universidad en log(U) y dsp accedo a la matriz para obtener el conj de lineas
+
+    Para obtener universidades por linea: busco el conjunto de celdas de mi linea e itero sobre el para concatenar cada universidad encontrada en un nuevo conj
+
+
+    Rep: estr r → bool
+    Rep(e) ≡  
+
+-- Ejercicio 5 --
+    Multar se representa con estr
+        donde estr es tupla(diccTrie(loc, tupla(vehiculos: conj(vehiculo), camaras: conj(camara), multas: conj(multas) ))
+                            diccTrie(vehiculo, tupla(conj(localidad), conj(multas)))
+                            diccLog(camara, ))
+
+Dada una localidad, obtener los veh ́ıculos registrados, las c ́amaras y las multas (incluyendo las de sus vehıculos y las de sus c ́amaras), 
+cada operaci ́on en O(|l|). diccTrie(localidad, tupla<conjVehiculo, conjCamaras, conjMultas>)
+diccTrie(localidades, conjMultasVehiculos)
+diccTrie(localidades, conjMultascamaras)
+
+Dado un vehıculo, obtener su localidad y sus multas, ambos en O(1). diccTrie(vehiculo, <itLocalidad, >)
+
+
+Abonar (eliminando del sistema) las multas de un vehıculo en O(m). ↑
+
+
+Dada una camara, un vehiculo y un monto, registrar una nueva multa en O(logn). diccLog(camara, ...)
+
+multa: <v: vehiculo, c: camara, monto: nat>
+
+
+
+AVER TENGO UNA MANZANAS PAPOZA
+    Multar se representa con estr
+        donde estr es tupla(diccTrie(localidad, tupla()))
+
+Hola, estuve tratando de entender la resolución del ejercicio de Mult.Ar (GRACIAS SANTOS AYUDANTES POR HACERLA, MARTIRES DE DIOS), y no logro comprender como es

@@ -1,0 +1,5 @@
+Representacion
+    Cumpleaños se representa con estr 
+        donde estr es tupla(negocios: diccAVL(negocio, colaPrior(regalo)), 
+                            regalos: colaPrior(tupla(regalo: regalo, negocio: itDiccAVL)), 
+                            negociosConRegalos: conjLineal(itDiccAVL))

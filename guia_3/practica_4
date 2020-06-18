@@ -120,6 +120,8 @@ Parametros Formales
 Se explica con TAD Diccionario con historia
 Generos diccHist
 
+-- malardo ejercicio, creo que teniendo de estr un diccionario con significado una tupla(σ, nat) es trivial, me piden todo en O(n) 
+-- pato entendio que cuando borras deberias poder obtener el anterior, podemos hacer un dicc con sign pila, solo me interesa el Primero
 Operaciones
     Definido?(in clave: k, in dc: diccHist) → res: bool
         Pre: { true }
@@ -130,5 +132,81 @@ Operaciones
         Pre: { Definido?(clave, dc) }
         Post: { res =obs CantSignificado(clave, dc) }
         Complejidad: O(n)
+    
+    ...
 
--- malardo ejercicio, creo que teniendo de estr un diccionario con significado una tupla(σ, nat) es trivial, me piden todo en O(n) 
+Representacion
+    Diccionario con historia(α) se representa con estr
+        donde estr es dicc(k, pila(σ))
+
+    Rep: estr e → bool
+    Rep(e) ≡ true
+    
+    Abs: estr e → diccHist
+    Abs(e) ≡ dc |   (∀ clave: k)(Definido(k, dc) ↔ tamaño(obtener(k,e)) ≠ 0 ∧
+                    significado(k, dh) = tope(obtener(k, e)) ∧
+                    BorrarSignificado(k, dh) = desapilar(obtener(k, e)) ∧
+
+Algoritmos
+...pendientes
+
+-- Ejercicio 8 --
+
+    
+Ejercicio 11
+    
+un vector que cada posicion tenga la cantidad ACUMULADA de personas, entonces hago Hasta - Desde Y PAM SUMA DE RIEMANN
+
+IAB se representa con vector(nat)
+
+    Rep: estr e → bool
+    Rep(e) ≡ true <-> (pa todo i, j: nat)(0<= i < j <= long(e) =>l i-esimo(e, i) <= i-esimo(e, j))
+
+    Abs: estr e → IAB
+    Abs(<>) ≡ Comenzar
+    Abs(s◦n) ≡ TerminaDia(Abs(s), n)
+    
+1-  cantPersonas(iab, desde, hasta) -> res: nat { //ponele que se cumple la pre
+       res = iab[hasta] - iab[desde]   
+    }
+2- O(n) maestro
+3- pillo lince
+
+4- a ver tranquilamente podria iterar sobre posibles d's y quedarme con el mayor (creo?) pero dudo que sea esa la idea
+
+Ejercicio 12
+
+opcion 1 - un vector de punteros a palabras Y un diccionario (de hash) de palabras a conjunto de posiciones y de yapa un conjunto con las palabras mas repetidas (se va calculando a medida que se insertan y cambian palabras)
+
+EL CONJUNTO CON LAS MAS REPETIDAS ESTA IMPLEMENTADO CON HASHÍS
+
+
+no se me ocurre una mejor alternativa
+Texto se representa con estr
+donde estr es tupla(posiciones: vector(puntero(palabra)), palabras: dicc(palabra, conj(nat)), masRep: conj(punteros(palabras)), maxRep: nat)
+
+
+cambiarPalabra(texto, palabra* vieja, nueva){ //kiherbgaierbytg con los punteros
+    conj = palabras.obtener(vieja) //O(1)
+    ItConj = CrearIt(conj) //O(1)
+    vieja = nueva //por copia, ahora el puntero apunta a la nueva O(1)
+    existeNueva = palabras.definido(nueva) //O(1)
+
+
+    if(existeNueva){ //tengo que insertar todas las posiciones del
+        //tengo que agregar todos los elementos del conjunto viejo al conjunto nuevo //O(k)
+        //tengo que borrar la definicion vieja en el diccionario //O(1)
+        // si el conjunto nuevo tiene la misma mcantidad de elementos que maxRep agrego la palabra //O(1)
+        // si el cardinal nuevo es mayor a max rep this.maxRep = new Conj(nuevo) //O(1) con ricos memory leaks
+    } else {
+        //crear una nueva entrada en el dicc //O(1)
+        //tengo que agregar todos los elementos del conjunto viejo al conjunto nuevo //O(k)
+        //tengo que borrar la definicion vieja en el diccionario //O(1)
+    } JAJ
+}
+
+
+Ejercicio 14
+trank, somos capos, es ez
+
+hay que usar un vector ordenado , y para el c, idem que acumule la plata

@@ -1,0 +1,373 @@
+DISEÑAR = 1- estructura
+          2- Rep y Abs
+          3- algoritmos mas importantes y justificar que se cumplen los requerimientos
+
+Ejercicio 1
+Considere el TADMulticonjunto(Nat).
+1.  Dis ́e ̃nelo utilizando listas enlazadas de naturales. Calcule el orden de complejidad (de peor caso) de lasoperaciones de inserci ́on, borrado y c ́alculo de la cantidad de repeticiones de un elemento.
+2.  Piense en otras estructuras –m ́as all ́a de las listas– y estime los  ́ordenes de complejidad de peor caso quetendr ́ıan las operaciones mencionadas.
+
+n es i=0 ∑ ∞  #(conj, i)
+
+1) insercion O(1), borrado O(n), cant de repeticiones O(n)
+Multiconjunto se representa con lista(nat)
+rep(e) ≡ true
+abs(e) ≡ if e = Vacia() then ∅ else Ag(Primero(e), Abs(Fin(e)))
+
+insertar(inout multi, nat n){
+    AgregarAdelante(multi, n)
+}
+
+borrar(inout multi, nat n){
+    it = CrearIt(multi)
+    encontrado = false
+    while HaySiguiente(it) && !encontrado {
+        if(Siguiente(it) == n){
+            EliminarSiguiente(it)
+            encontrado = true
+        }
+        Avanzar(It)
+    }
+}
+cardinal(inout multi, nat n) -> nat res{
+    it = CrearIt(multi)
+    res = 0
+    while HaySiguiente(it) {
+        if(Siguiente(it) == n){
+            res++
+        }
+        Avanzar(It)
+
+    }
+}
+
+2.
+arbol AVL (el valor del nodo es una tupla con la clave y el cardinal) todo es O(log n) siendo n la cantidad de claves distintas
+diccionario (la clave es el numero y el significado es el card) todo es O(n) (tambien cambia la definicion de n)
+hash table (u know the drill)
+
+Ejercicio 2
+1.
+lista enlazada ordenada (GRACIAS ALGO 1)
+interseccion(in A: lista, in B: lista) -> res: lista {  //es θ(n+m)
+    res = Vacia()
+    itA = CrearIt(A)
+    itB = CrearIt(B)
+    while(HaySiguiente(itA) || HaySiguiente(itB)){
+        if(HaySiguiente(itA) && HaySiguiente(itB)){
+
+            if(Siguiente(itA) == Siguiente(itB)){
+                AgregarAtras(res, Siguiente(itA))
+                Avanzar(ItA)
+                Avanzar(ItB)
+            } else if(Siguiente(itA) < Siguiente(itB)){
+                Avanzar(ItA)
+            } else {
+                Avanzar(ItB)
+            }
+
+        } else if(HaySiguiente(itA)){
+
+            if(Siguiente(itA) == Anterior(itB)){
+                AgregarAtras(res, Siguiente(itA))
+                break
+            } else if(Siguiente(itA) < Siguiente(itB)){
+                Avanzar(ItA)
+            } else {
+                break
+            }
+
+        } else {
+            idem B
+        }
+    }
+}
+
+union(in A: lista, in B: lista) -> res: lista {  //es θ(n+m) 
+    res = Vacia()
+    itA = CrearIt(A)
+    itB = CrearIt(B)
+    while(HaySiguiente(itA) || HaySiguiente(itB)){
+        if(!HaySiguiente(itB) || (HaySiguiente(itA) && Siguiente(itA) < Siguiente(itB))){
+
+            AgregarAtras(res, Siguiente(itA))
+            Avanzar(ItA)
+
+        } else if(HaySiguiente(itA)){
+
+            AgregarAtras(res, Siguiente(itB))
+            Avanzar(ItB)
+
+        }
+    }
+}
+
+lista enlazada no ordenada 
+interseccion(in A: lista, in B: lista) -> res: lista {  //es θ(n*m)
+    res = Vacia()
+    itA = CrearIt(A)
+    itB = CrearIt(B)
+    while(HaySiguiente(itA)){ //θ(n)
+        if(Esta(Siguiente(ItA), B)){ //θ(m)
+            AgregarAtras(res, Siguiente(itA))
+        }
+    }
+}
+
+union(in A: lista, in B: lista) -> res: lista {  //es θ(n*m)
+
+    res = A //por copia θ(n)
+    itA = CrearIt(A)
+    itB = CrearIt(B)
+
+    while(HaySiguiente(itB)){ //θ(m)
+        if(!Esta(Siguiente(ItB), res)){ //θ(n)
+            AgregarAtras(res, Siguiente(itB))
+        }
+    }
+
+}
+
+ABB //ponele que los puedo iterar con inorder
+http://www.cs.cmu.edu/afs/cs/academic/class/15210-s12/www/lectures/lecture14.pdf
+https://www.cs.cmu.edu/afs/cs/academic/class/15210-s15/www/lectures/bst-notes.pdf
+
+interseccion(in A: ABB, in B: ABB) -> res: ABB {  //es θ(n+m) //en realidad egregar los elemntenos a res no es trivial
+    exactamente igual que las listas ordenadas
+}
+
+union(in A: ABB, in B: ABB) -> res: ABB {  //es θ(n+m)
+
+    exactamente igual que las listas ordenadas
+
+}
+
+
+
+Ejercicio 6)
+DiccHist(k, σ) se representa con Dicc(k, lista(sigma))
+
+
+    Rep: estr e → bool
+    Rep(e) ≡ true
+
+    Abs: estr e → diccHist
+    Abs(vacio) ≡ vacio //el segundo vacio es de dicc normal
+    Abs(definir(k, sig, dicHist)) ≡ definir(k, sig, abs(dicHist)) //el segundo definir es de dicc normal
+
+Definido? O(n)
+Vac´ıo O(1)
+Significado O(n)
+Definir O(n)
+BorrarSignificado O(n) la pre es que este definido y la post es que res coincide con BorrarSignificado abstractovich
+CantSignificados O(n) la pre es que este definido y la post es que res coincide con CantSignificados abstractovich
+
+el resto de la interfaz es igual a diccionario
+
+definir(clave, significado, dic){
+    It = CrearIt(dic)
+    encontro = false
+    while(haySiguiente(It) && !encontro){
+        if(siguienteClave(It) == clave){
+            encontro = true
+        }
+    }
+    if(!encontro){
+       It = DefinirRapido(dic, Vacia //de listas)
+    }
+    AgregarAdelante(SiguienteSignificado(It), significado)
+}
+
+CantSignificados(clave, dic){
+    longitud(Significado(dic, clave))
+}
+
+BorrarSignificado(clave, dic){
+    It = CrearIt(Significado(dic, clave))
+    EliminarSiguiente(It)
+}
+
+Ejercicio 7
+ABB(α) se representa con estr
+donde estr es puntero(nodo)
+donde nodo es tupla(dato: α, izq: puntero(nodo), der: puntero(nodo))
+
+ya esta hecho BRO JAJAJA en la practica 3 (voy a usar este)
+estr es tupla
+<altura: nat,
+izq: puntero(estr),
+raiz : α,
+der : puntero(estr)>
+
+iNil() -> res: ABB {
+    res = <raiz: qcy constructor por default, altura: 0, izq: NULL, der: NULL>
+}
+
+iBin(izq: ABB, raiz: α, der: ABB) -> res: ABB {
+    res = <raiz: raiz, altura: 1, izq: izq, der: der>
+} NO SE QUE MIERDA HACER
+
+Ejercicio 8
+
+a) con arbol binario (max heap)
+
+Cola de Prioridad(α) se representa con estr
+donde estr es tupla(dato: α, izq: puntero(estr), der: puntero(estr), padre: puntero(estr))
+
+    Rep: estr e → bool
+    Rep(e) ≡ (n.padre != null =>l n.dato < n.padre.valor) ∧ (n.izq != null =>l n.dato > n.izq.valor) ∧ (n.der != null =>l n.valor > n.der.valor)
+                ∧ (n.der != null =>l n.izq != null) //y que no haya ciclos!!!!
+    
+    Abs: estr e → colaPrior
+    Abs(e) ≡ encolar(e.dato, merge(e.izq, e.der)) //me cago en los punteros, hago 3 ifs viendo cual es nulo y cual no
+
+    merge(cola1, vacia) ≡ cola1
+    merge(cola1, encolar(dato, cola2)) ≡ merge(encolar(dato, cola1), cola2) //wow hice tail recursion soy crack
+    ALGORITMOS HIJO DE PUTA
+    vacio?() //wtf!!!!
+
+    proximo(in cola: colaprio) -> res: α{
+        res = cola.dato //O(1)
+    }
+
+    desencolar(in/out cola: colaprio) -> res: α{ //encontrar el ultimo es mucho mas quilombo, se me ocurre que si tuviera la altura de cada nodo precalculada
+                                                // podria preguntar: alt(izq) > alt(der) ? voy a izq : voy a derecha y listovich
+                                                //y es logaritmico. bien pato, conste que marto estyaba pensando en algo parecio egoista de mierda la concha puta nde tu madre quiero ver como comiteas esto!! pense que no se podia :) ah re pete
+        res = cola.dato
+    }
+
+con vector(max heap)
+
+Representacion
+    Cola de Prioridad(α) se representa con estr
+        donde estr es vector(α)
+
+    Rep: estr e → bool
+    Rep(e) ≡ (∀ i: nat)((0 ≤ 2*i+1 < long(e) →ₗ e[i] > e[2*i+1]) ∧
+                        (0 ≤ 2*i+2 < long(e) →ₗ e[i] > e[2*i+2]) ) //creo jaja nose mama ayudame
+    
+    Abs: estr e → colaPrior
+    Abs(e) ≡ ConstruirColaDePrioridad(e, 0)
+
+    ConstruirColaDePrioridad(e, i) ≡   if i >= long(e) then //ponele que existe el observador •[•]
+                                        vacia
+                                    else 
+                                        encolar(e[i], merge(ConstruirColaDePrioridad(e, 2*i+1), ConstruirColaDePrioridad(e, 2*i+2)))
+                                    fi //creo jaja nose mama ayudame
+
+                    
+Algoritmos
+    proximo(in cola: colaprio) -> res: α{
+        res = cola[0]
+    }
+
+    desencolar(in/out cola: colaprio) -> res: α {
+        cola[0] = cola[longitud(cola)-1]
+        i = 0 
+        vector.TirarUltimos(1)
+        while ((2*i+1 ≤ longitud(cola) ∧ (cola[i] < cola[2*i+1]) ∨ (2*i+2 ≤ longitud(cola) ∨ cola[i] < cola[2*i+2])) {
+            if (cola[i] < cola[2*i+1]) {
+                aux = cola[i]
+                cola[i] = cola[2*i+1]
+                cola[2*i+1] = aux
+                i = 2*i+1;
+            } else {
+                aux = cola[i]
+                cola[i] = cola[2*i+2]
+                cola[2*i+2] = aux
+                i = 2*i+2;
+            }
+        }
+    }
+
+
+
+Interfaz
+Modulo Cola de prioridad
+Parametros Formales
+    generos α
+
+Se explica con TAD Cola de prioridad
+Generos colaprio
+
+Operaciones
+
+Ejercicio 9
+LISTA DOBLEMENTE ENLAZADA ORDENADA JEJOXXX
+
+Ejercicio 10
+Un arreglo de 0 a 100 con significados de conjuntos implementados diccLog o arreglos dimensionables de 100 posiviocnes(mucha memoria perdida vs O(1) eliminando)
+Lo mismo pero de 0 a n
+diccLog de conjuntos(tmb logaritmico)
+
+
+
+Ejercicio 11
+    
+un vector que cada posicion tenga la cantidad ACUMULADA de personas, entonces hago Hasta - Desde Y PAM SUMA DE RIEMANN
+
+IAB se representa con vector(nat)
+
+    Rep: estr e → bool
+    Rep(e) ≡ true <-> (pa todo i, j: nat)(0<= i < j <= long(e) =>l i-esimo(e, i) <= i-esimo(e, j))
+
+    Abs: estr e → IAB
+    Abs(<>) ≡ Comenzar
+    Abs(s◦n) ≡ TerminaDia(Abs(s), n)
+    
+1-  cantPersonas(iab, desde, hasta) -> res: nat { //ponele que se cumple la pre
+       res = iab[hasta] - iab[desde]   
+    }
+2- O(n) maestro
+3- pillo lince
+
+4- a ver tranquilamente podria iterar sobre posibles d's y quedarme con el mayor (creo?) pero dudo que sea esa la idea
+
+Ejercicio 12
+
+opcion 1 - un vector de punteros a palabras Y un diccionario (de tries) de palabras a conjunto de posiciones y de yapa un conjunto con las palabras mas repetidas (se va calculando a medida que se insertan y cambian palabras)
+
+EL CONJUNTO CON LAS MAS REPETIDAS ESTA IMPLEMENTADO CON TRIE
+
+
+no se me ocurre una mejor alternativa
+Texto se representa con estr
+donde estr es tupla(posiciones: vector(puntero(palabra)), palabras: diccTrie(palabra, conj(nat)), masRep: conj(punteros(palabras)), maxRep: nat)
+
+Otra estr pero ahora sabemos iteradores padre
+    Texto se representa con estr
+        donde estr es tupla(palabras: diccTrie(palabra, conjLineal(nat)), posiciones: vector(itDiccTrie(...))), masRep: conjLineal(itDiccTrie(...)), maxRep: nat)
+
+subtexto(txt, ini, fin){
+    res = <diccvacio, vec(fin-ini), conjvacio, 0>
+    for(i=ini, i<= fin, i++){
+        agPalabra(res, vec[i].siguiente().clave) //o de uan? sa
+    }
+}
+
+cambiarPalabra(texto, palabra* vieja, nueva){ //kiherbgaierbytg con los punteros
+    conj = palabras.obtener(vieja) //O(1) pq es O(|palabra mas larga|) y esta acotada
+    ItConj = CrearIt(conj) //O(1)
+    vieja = nueva //por copia, ahora el puntero apunta a la nueva O(1)
+    existeNueva = palabras.definido(nueva) //O(1)
+
+
+    if(existeNueva){ //tengo que insertar todas las posiciones del
+        //tengo que agregar todos los elementos del conjunto viejo al conjunto nuevo //O(k)
+        //tengo que borrar la definicion vieja en el diccionario //O(1)
+        // si el conjunto nuevo tiene la misma mcantidad de elementos que maxRep agrego la palabra //O(1)
+        // si el cardinal nuevo es mayor a max rep this.maxRep = new Conj(nuevo) //O(1) con ricos memory leaks
+    } else {
+        //crear una nueva entrada en el dicc //O(1)
+        //tengo que agregar todos los elementos del conjunto viejo al conjunto nuevo //O(k)
+        //tengo que borrar la definicion vieja en el diccionario //O(1)
+    } JAJ
+}
+
+
+Ejercicio 14
+trank, somos capos, es ez
+
+hay que usar un vector ordenado , y para el c, idem que acumule la plata
+
+

@@ -1,0 +1,225 @@
+Interfaz
+Modulo Simcity
+Se explica con TAD Simcity
+Generos simcity, sc
+Operaciones
+
+EMPEZAR_PARTIDA(in m: mapa) → res: sc
+PRE  {true}
+POST {res =obs empezarPartida(m)}
+Descripcion: Toma un mapa y devuelve un SimCity para empezar la partida
+Complejidad: O(1)
+Aliasing: 
+
+AGREGAR_CASA(inout sc: simcity, in c: casilla)
+PRE  {sc = sc₀ ∧ sePuedeConstruir(sc, c)}
+POST {sc =obs agregarCasa(sc₀, c)}
+Descripcion: Agrega una construccion de tipo casa al simcity en la ubicacion de la casilla c
+Complejidad: O(1)
+Aliasing:
+
+AGREGAR_COMERCIO(inout sc: simcity, in c: casilla)
+PRE  {sePuedeConstruir(s, c)}
+POST {sc =obs agregarComercio(sc₀, c)}
+Descripcion: Agrega una construccion de tipo comercio al simcity en la ubicacion de la casilla c
+Complejidad: O(1)
+Aliasing:
+
+AVANZAR_TURNO(inout sc: simcity)
+PRE  {sc =obs sc₀ ∧ huboConstruccion(sc)}
+POST {sc =obs avanzarTurno(sc₀)}
+Descripcion: Avanza el turno de un simcity con todo lo que implica
+Complejidad:
+Aliasing:
+
+UNIR(in sc1, sc2: simcity) → res: simcity
+PRE  {
+        (∀ c: casilla)(c ∈ construcciones(sc1) ⇒ ¬hayRio(mapa(s2), c)) ∧L
+        (∀ c: casilla)(c ∈ construcciones(sc2) ⇒ ¬hayRio(mapa(s1), c)) ∧L
+        (∀ c1, c2: casilla)(c1 ∈ construcciones(s1) ∧ c2 ∈ construcciones(s2) ⇒
+            (esCasillaDeMaximoNivel(s1, c1) ∧ esCasillaDeMaximoNivel(s2, c2)) ⇒ c1 ≠ c2)
+     }
+POST {res =obs unir(sc1, sc2)}
+Descripcion: Para unir dos simcities se tiene que cumplir que para todas las posiciones de las construcciones de ambos,
+             no puede haber un rio en esa posicion en el otro simcity. Y ademas, aquellas construcciones de maximo nivel
+             de los simcities no puede encontrarse en la misma posicion (casilla).
+Complejidad: O(1)
+Aliasing:
+
+MAPA(in sc: simcity) → res: mapa
+PRE  {true}
+POST {res =obs mapa(sc)}
+Descripcion: Dado un simcity devuelve su mapa
+Complejidad: O(1)
+Aliasing:
+
+CASAS(in sc: simcity) → res: conjunto(casilla)
+PRE  {true}
+POST {res =obs casas(sc)}
+Descripcion: Dado un simcity devuelve el conjunto de todas sus casas
+Complejidad: O(1)
+Aliasing:
+
+COMERCIOS(in sc: simcity) → res: conjunto(casilla)
+PRE  {true}
+POST {res =obs comercios(sc)}
+Descripcion: Dado un simcity devuelve el conjunto de todos sus comercios
+Complejidad: O(1)
+Aliasing:
+
+NIVEL(in sc: simcity, in c: casilla) → res: nat
+PRE  {hayConstruccion(sc, c)}
+POST {res =obs nivel(sc, c)}
+Descripcion: Dado un simcity y una casilla que tiene una construccion en ese simcity, devuelve su nivel
+Complejidad: O(n + m) //con n = #casas(sc) y m = #comercios(sc)
+Aliasing:
+
+HUBO_CONSTRUCCION(in sc: simcity) → res: bool
+PRE  {true}
+POST {res =obs huboConstruccion(sc)}
+Descripcion: Dado un simcity devuelve verdadero si hubo una construccion en ese turno
+Complejidad: O(1)
+Aliasing:
+
+POPULARIDAD(in sc: simcity) → res: nat
+PRE  {true}
+POST {res =obs popularidad(sc)}
+Descripcion: Dado un simcity devuelve la cantidad de veces que el simcity sufrio una union 
+Complejidad: O(1)
+Aliasing:
+
+TURNO_ACTUAL(in sc: simcity) → res: nat
+PRE  {true}
+POST {res =obs antiguedad(sc)}
+Descripcion: Dado un simcity devuelve el numero del turno actual
+Complejidad: O(1)
+Aliasing:
+
+Representacion
+    Representacion
+    Simcity se representa con estr
+        donde estr es tupla(mapa: mapa, 
+                            cantTurnos: nat, 
+                            casas: lista(tupla(casilla: Casilla, nivel: nat)), 
+                            comercios: lista(tupla(casilla: Casilla, nivel: nat)), 
+                            popularidad: nat,
+                            huboConstruccion: bool)
+
+
+    Rep en castellano
+        (1) La interseccion entre el conjunto casas y comercios debe ser vacia
+        (2) Para toda tupla perteneciente a casa o comercio, // AAAAA
+        (3) Las casas y comercios no deben superponerse con los rios del mapa
+        (4) El nivel de todas las casas y comercios debe ser menor a cantTurnos
+        (5) Si un comercio tiene casas a distancia 3 Manhattan, el nivel de dicho comercio es igual al mayor nivel de dichas casas 
+
+    Rep: estr e → bool
+    Rep(e) ≡    (1) e.casas ∩ e.comercios ∧
+                (3) (∀ t: tupla(casilla: casilla, nivel: nat))(t ∈ e.casas ∨ t ∈ e.comercios →ₗ hayRio(e.mapa, t.casilla) = false)
+                (4) (∀ t: tupla(casilla: casilla, nivel: nat))(t ∈ e.casas ∨ t ∈ e.comercios →ₗ t.nivel < e.cantTurnos)
+
+                (5) e.huboConstruccion → (∀ com: constr)
+                    (
+                    com ∈ e.comercios →ₗ
+                    (∀ ca: constr)(ca ∈ e.casas ∧ distanciaManhattan(ca.casilla, com.casilla) ≤ 3 →ₗ 
+                    (∃ casaMayor: constr)(distanciaManhattan(casaMayor.casilla, com.casilla) ≤ 3 ∧ 
+                    casaMayor.nivel ≥ ca.nivel ∧ casaMayor.nivel = com.nivel))
+                    )
+
+    
+    Abs: estr e → simcity
+    Abs(e) ≡ sc | mapa(sc) =obs e.mapa ∧ casas(sc) =obs e.casas ∧ comercios(sc) =obs e.comercios ∧ popularidad(sc) = e.popularidad ∧
+                (∀ t: tupla(casilla: casilla, nivel: nat))(t ∈ e.casas ∨ t ∈ e.comercios →ₗ 
+                (∃ c: casilla)(c ∈ (casas(sc) ∪ comercios(sc) ∧ₗ c =obs t.casilla ∧ nivel(sc, c) =obs t.nivel))) ∧
+                e.huboConstruccion = huboConstruccion(sc)
+
+
+Algoritmos
+
+iEmpezarPartida(in m: mapa) → res: simcity
+    res ← <m, 0, Vacio, Vacio, 0, false> //donde Vacio del módulo Conjunto Lineal
+
+iAgregarComercio(inout sc: simcity, in c: casilla) {
+    constr ← <casilla, 0>
+    sc.huboConstruccion ← true
+    AgregarRapido(sc.comercios, constr)
+}
+
+iAgregarCasa(inout sc: simcity, in c: casilla) {
+    constr ← <casilla, 0>
+    sc.huboConstruccion ← true
+    AgregarRapido(sc.comercios, constr)
+}
+    
+iAvanzarTurno(inout sc: simcity) {
+    it ← crearIt(sc.casas)
+    while(hayProximo(it)){
+        siguiente(it).nivel++
+    }
+    it ← crearIt(sc.comercios)
+    while(haySiguiente(it)){
+        com ← siguiente(it)
+        itCasa ← crearIt(sc.casas)
+        while(haySiguiente(itCasa)){
+            proximoNivel ← com.nivel + 1
+            casa ← siguiente(itCasa)
+            if(mahattan(com, casa) ≤ 3 ∧ casa.nivel ≥ proximoNivel){
+                proximoNivel ← casa.nivel
+            }
+        }
+        com.nivel = proximoNivel itDicc
+    }
+}
+
+iManhattan(in comercio: casilla, in casa: casilla) → res: nat {
+    res ← |π1(comercio) - π1(casa)| + |π2(comercio) - π2(casa)|
+    return res
+}
+
+iUnir(in sc1, sc2: simcity) → res: simcity {
+    
+}
+
+iTurnoActual(in sc: simcity) → res: nat {
+    res ← sc.cantTurnos
+    return res
+}
+
+iPopularidad(in sc: simcity) → res: nat {
+    res ← sc.popularidad
+    return res
+}
+
+iNivel(in sc: simcity, in c: casilla) → res: nat {
+    it ← CrearIt(sc.casas)
+    while (haySiguiente(it)) {
+        Casa ← Siguiente(it)
+        if (Casa.casilla = c) {
+            res ← Casa.nivel
+        }
+    }
+
+    it ← CrearIt(sc.comercios)
+    while (haySiguiente(it)) {
+        Comercio ← Siguiente(it)
+        if (Comercio.casilla = c) {
+            res ← Comercio.nivel
+        }
+    }
+}
+
+iMapa(in sc: simcity) → res: mapa
+    res ← sc.mapa
+    return res
+
+iCasas(in sc: simcity) → res: lista o conj
+    res ← sc.casas
+    return res
+
+iConstrucciones(in sc: simcity) → res: lista o conj
+    res ← sc.construcciones
+    return res
+
+iHuboConstruccion(in sc: simcity) → res: bool
+    res ← sc.huboConstruccion
+    return res
