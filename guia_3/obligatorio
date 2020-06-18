@@ -1,5 +1,51 @@
 Representacion
     Cumpleaños se representa con estr 
-        donde estr es tupla(negocios: diccAVL(negocio, colaPrior(regalo)), 
-                            regalos: colaPrior(tupla(regalo: regalo, negocio: itDiccAVL)), 
-                            negociosConRegalos: conjLineal(itDiccAVL))
+        donde estr es tupla(negocios: diccAVL(negocio, conjLineal(regalo)),
+                            regalos: colaPrio(tupla(precio: nat, negocio: itConjLineal, regalo: itConjLineal)), 
+                            negociosConRegalos: conjLineal(negocio))
+
+Explicacion de la eleccion de la estructura: 
+    Mi estructura elegida consta de una tupla con 3 partes:
+        - Negocios: aqui guardo en un diccionario de claves de tipo negocio, un conjunto de regalos. Estos regalos provienen de cuando
+                    se listan los regalos de determinado comercio.
+        - Regalos:  Aqui tengo una cola de prioridad, implementada con un min-heap, teniendo como parametro de la prioridad el precio 
+                    de los regalos, es decir que la relacion de orden entre los elementos del heap esta dada por el precio que contiene la tupla.
+                    Entonces el precio mas bajo de todos se encontrara listo para ser obtenido en O(1)
+                    A su vez, tenemos dos iteradores, uno que apunta a el conjunto que contiene el regalo en cuestion. 
+                    Y el otro que apunta al negocio de dicho regalo, esto ultimo para poder eliminar el negocio de negociosConRegalos, 
+                    en caso de haber comprado el ultimo regalo.
+
+        -negociosConRegalos:    Este ultimos es un conjunto lineal que contiene todos los negocios donde la cantidad de regalos es mayor a cero
+                                Esto debido a que me lo piden en O(1), por lo que quiero tenerlo pre calculado.
+
+Algoritmos: 
+publicarLista(in/out c: cumple, in n: negocio, in l: dicc(regalo, nat))
+    Primero agrego el negocio a la lista de negocios con negociosConRegalos y me quedo con el iterador. O(1)
+    Luego empiezo a recorrer todos los regalos del diccionario, y los inserto en el conjunto que es la significado del negocio en negocios,
+    es en esto ultimo donde esta el O(log N) para buscar mi negocio y O(L) porque inserto uno a uno mis regalos. 
+    Con cada insercion, yo obtengo un iterador apuntando a ese regalo, con el cual ya puedo generar mi tupla que contiene,
+    el precio, el iterador al regalo y el iterador al negocio en negociosConRegalos.
+    Y la inserto en el min-heap en O(1)
+    La complejidad final es entonces, O(L + log N)
+
+regalos(in c: cumple, in n: negocio) → res : conj(regalo)
+    Busco el negocio en mi diccAVL, lo cual es O(log N) y devuelvo su significado, que es el conjunto que quiero devolver
+    La complejidad final es entonces, O(log N)
+
+negociosConRegalos(in c: cumple) → res: conj(negocio)
+    Como tengo esta informacion precalculada, puedo devolver estr.negociosConRegalos en O(1)
+
+regaloMasBarato(in c: cumple) → res : regalo
+    Por esta funcion decidi tener un min-heap, entonces en O(1) yo puedo decir cual es el regalo mas barato de todos antes de comprarlo.
+    El criterio si tengo dos o mas del mismo precio(prioridad) es basicamente quien se encuentra primero en el heap.
+    Por lo que probablemente devuelva el que tenga mas antiguedad en las listas.
+
+comprarRegaloMasBarato(in/out c: cumple)
+    tuplaRegalo ← Proximo(c.regalos)    //O(1)
+    Desencolar(c.regalos)               //O(log R)
+    itRegalo ← tuplaRegalo.regalo       //O(1)
+    EliminarSiguiente(itRegalo)         //O(1)
+    if(HayAnterior(itRegalo) == false ∧ HaySiguiente(itRegalo) == false) then   //O(1)
+        itConjNegConRegalos ← tuplaRegalo.negocio                               //O(1)
+        EliminarSiguiente(itConjNegConRegalos)                                  //O(1)
+    endif
