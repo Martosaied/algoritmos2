@@ -1,8 +1,18 @@
+Servicios Usados
+    Pedir que el DICC que tenemos como parametro pueda dar su minimo en O(1)
+
 Representacion
     Cumpleaños se representa con estr 
         donde estr es tupla(negocios: diccAVL(negocio, conjLineal(regalo)),
                             regalos: colaPrio(tupla(precio: nat, negocio: itConjLineal, regalo: itConjLineal)), 
                             negociosConRegalos: conjLineal(negocio))
+
+        donde estr es tupla(negocios: diccAVL(negocio, 
+                                              tupla(conjLineal(regalo), dicc(regalo, precio), regaloMasBaratoNeg: tupla(precio: nat, regalo: itConjLineal),
+                            regaloMasBarato: tupla(precio: nat, negocio: itConjLineal, regalo: itConjLineal)), 
+                            negociosConRegalos: conjLineal(negocio))
+
+    MAMA PUEDO PEDIR QUE EL DICC ME DEVUELVA LA CLAVE MAS CHICA EN LOG N
 
 Explicacion de la eleccion de la estructura: 
     Mi estructura elegida consta de una tupla con 3 partes:
