@@ -72,7 +72,10 @@ void Conjunto<T>::insertar(const T &clave) {
 
 template<class T>
 void Conjunto<T>::remover(const T &clave) {
-    //PREGUNTAR SI PERTENECE ANTES
+    if (!pertenece(clave)) {
+        return;
+    }
+
     if (_raiz->valor == clave && _raiz->izq == nullptr && _raiz->der == nullptr) {
         delete _raiz;
         _raiz = nullptr;
@@ -155,7 +158,7 @@ void Conjunto<T>::_vaciar(Conjunto::Nodo *node) {
 
 template<class T>
 typename Conjunto<T>::Nodo *Conjunto<T>::_remover(const T &clave, Conjunto::Nodo *node) {
-    if (node == NULL) return node;
+    if (node == nullptr) return node;
     if(node->_cant != 0) node->_cant--;
     if (clave < node->valor)
         node->izq = _remover(clave, node->izq);
@@ -164,16 +167,16 @@ typename Conjunto<T>::Nodo *Conjunto<T>::_remover(const T &clave, Conjunto::Nodo
     else{
         bool removerRaiz = false;
         if (clave == _raiz->valor) removerRaiz = true;
-        if (node->izq == NULL && node->der == NULL) {
+        if (node->izq == nullptr && node->der == nullptr) {
             delete node;
-            return NULL;
-        } else if (node->izq == NULL){
+            return nullptr;
+        } else if (node->izq == nullptr){
             Nodo *temp = node->der;
             delete node;
             if (removerRaiz) _raiz = temp;
             return temp;
         }
-        else if (node->der == NULL){
+        else if (node->der == nullptr){
             Nodo *temp = node->izq;
             delete node;
             if (removerRaiz) _raiz = temp;

@@ -98,4 +98,3 @@ comprarRegaloMasBarato(in/out c: cumple)
         EliminarSiguiente(itConjNegConRegalos)                                  //O(1)
     endif
     EliminarSiguiente(tuplaDelActual.regalo)   //O(1)
-
