@@ -1,5 +1,6 @@
 Servicios Usados
     Pedir que el DICC que tenemos como parametro pueda dar su minimo en O(1)
+    y que sea iterable
 
 Representacion
     Cumpleaños se representa con estr 
@@ -7,39 +8,50 @@ Representacion
                             regalos: colaPrio(tupla(precio: nat, negocio: itConjLineal, regalo: itConjLineal)), 
                             negociosConRegalos: conjLineal(negocio))
 
-        donde estr es tupla(negocios: diccAVL(negocio, 
-                                              tupla(conjLineal(regalo), dicc(regalo, precio), regaloMasBaratoNeg: tupla(precio: nat, regalo: itConjLineal),
-                            regaloMasBarato: tupla(precio: nat, negocio: itConjLineal, regalo: itConjLineal)), 
+        donde estr es tupla(negocios:   diccAVL(negocio, tupla( regalos: conjLineal(regalo), 
+                                                                negocioConRegalos: itConjLineal, 
+                                                                regalosPorPrecio: colaPrio(tupla(regalo: itConjLineal ,precio: nat)))),
+                            masBaratosPorNegocio: colaPrior(tupla(precio: nat, negocio: itDiccAVL)),
                             negociosConRegalos: conjLineal(negocio))
 
     MAMA PUEDO PEDIR QUE EL DICC ME DEVUELVA LA CLAVE MAS CHICA EN LOG N
 
 Explicacion de la eleccion de la estructura: 
     Mi estructura elegida consta de una tupla con 3 partes:
-        - Negocios: aqui guardo en un diccionario de claves de tipo negocio, un conjunto de regalos. Estos regalos provienen de cuando
-                    se listan los regalos de determinado comercio.
-        - Regalos:  Aqui tengo una cola de prioridad, implementada con un min-heap, teniendo como parametro de la prioridad el precio 
+        - Negocios: Aqui guardo en un diccionario de claves de tipo negocio 2 cosas: 
+                    Un conjunto de regalos. Estos regalos provienen de cuando se listan los regalos de determinado comercio.
+                    Una cola de prioridad la cual fue creada a partir de usar el algoritmo de floyd sobre una secuencia creada 
+                    a la hora de recorrer los regalos del diccionario. Esta cola de prioridad, ordenada por el precio perteneciente a la tupla, 
+                    contiene ademas, un iterador al conjunto de regalos.
+        - masBaratosPorNegocio:  Aqui tengo una cola de prioridad, implementada con un min-heap, teniendo como parametro de la prioridad el precio 
                     de los regalos, es decir que la relacion de orden entre los elementos del heap esta dada por el precio que contiene la tupla.
                     Entonces el precio mas bajo de todos se encontrara listo para ser obtenido en O(1)
-                    A su vez, tenemos dos iteradores, uno que apunta a el conjunto que contiene el regalo en cuestion. 
-                    Y el otro que apunta al negocio de dicho regalo, esto ultimo para poder eliminar el negocio de negociosConRegalos, 
-                    en caso de haber comprado el ultimo regalo.
-
+                    Ademas, la tupla contiene un iterador al diccionario de negocios. 
+                    Dado que en esta cola de prioridad solo se guardaran los regalos mas baratos de cada negocio, Encolar y Desencolar de la misma
+                    sera log N, con N la cantidad de negocios.
         -negociosConRegalos:    Este ultimos es un conjunto lineal que contiene todos los negocios donde la cantidad de regalos es mayor a cero
                                 Esto debido a que me lo piden en O(1), por lo que quiero tenerlo pre calculado.
 
 Algoritmos: 
 publicarLista(in/out c: cumple, in n: negocio, in l: dicc(regalo, nat))
-    itConjNegConRegalos ← Agregar(c.negociosConRegalos, n)
-    itDicc ← CrearIt(l)
-    conjRegalos ← Vacio()
-    while (HaySiguiente(itDicc)) {
-        itConjRegalo ← Agregar(conjRegalo, SiguienteClave(itDicc))
-        tupla ← <SiguienteSignificado(itDicc), itConjNegConRegalos, itConjRegalo>
-        Encolar(c.regalos, tupla)
-        Avanzar(itDicc)
+    itConjNegConRegalos ← Agregar(c.negociosConRegalos, n) \\O(1)
+    itDicc ← CrearIt(l) \\O(1)
+    conjRegalos ← Vacio() \\O(1)
+    itDiccNegocios ← Definir(n, conjRegalos) \\O(Log N)
+    vector ← vector.Vacio() \\O(1)
+    while (HaySiguiente(itDicc)) { \\O(L)
+        itConjRegalo ← Agregar(conjRegalo, SiguienteClave(itDicc)) \\O(1)
+        tupla ← <itConjRegalo, SiguienteSignificado(itDicc)> \\O(1)
+        AgregarAtras(vector, tupla) \\O(1)
+        Avanzar(itDicc) \\O(1)
     }
-    DefinirRapido(c.negocios, n, conjRegalos)
+
+    SiguienteSignificado(itDiccNegocios).regalos ← conjRegalos \\O(1)
+    SiguienteSignificado(itDiccNegocios).negocioConRegalos ← itConjNegConRegalos \\O(1)
+    SiguienteSignificado(itDiccNegocios).regalosPorPrecio ← Array2Heap(vector) \\ usando algortimo de floyd tenemos O(L)
+    precioMenor ← Proximo(SiguienteSignificado(itDiccNegocios).regalosPorPrecio() \\O(1)
+    minimo ← <precioMenor, itDiccNegocios>
+    Encolar(c.masBaratosPorNegocio, minimo) \\O(log N)
 
 Primero agrego el negocio a la lista de negocios con negociosConRegalos y me quedo con el iterador. O(1)
     Luego empiezo a recorrer todos los regalos del diccionario, y los inserto en el conjunto que es la significado del negocio en negocios,
@@ -63,20 +75,27 @@ negociosConRegalos(in c: cumple) → res: conj(negocio)
 - Como tengo esta informacion precalculada, puedo devolver estr.negociosConRegalos en O(1)
 
 regaloMasBarato(in c: cumple) → res : regalo
-    itConjLineal ← Proximo(c.regalos).regalo
-    res ← Siguiente(itConjLineal)
-    return res
+    itDiccAVL ← Proximo(c.masBaratosPorNegocio).negocio
+    tupla ← Siguiente(itDiccAVL)
+    itRegalo ← Proximo(tupla.regalosPorPrecio)
+    return Siguiente(itRegalo)
 
 - Por esta funcion decidi tener un min-heap, entonces en O(1) yo puedo decir cual es el regalo mas barato de todos antes de comprarlo.
     El criterio si tengo dos o mas del mismo precio(prioridad) es basicamente quien se encuentra primero en el heap.
     Por lo que probablemente devuelva el que tenga mas antiguedad en las listas.
 
 comprarRegaloMasBarato(in/out c: cumple)
-    tuplaRegalo ← Proximo(c.regalos)    //O(1)
-    Desencolar(c.regalos)               //O(log R)
-    itRegalo ← tuplaRegalo.regalo       //O(1)
-    EliminarSiguiente(itRegalo)         //O(1)
-    if(HayAnterior(itRegalo) == false ∧ HaySiguiente(itRegalo) == false) then   //O(1)
+    PrecioNegocio ← Proximo(c.masBaratosPorNegocio)    //O(1)
+    Desencolar(c.masBaratosPorNegocio)  //O(log N) con N cantidad de negocios
+    itDiccNegocios ← PrecioNegocio.negocio       //O(1)
+    tuplaNegocio ← SiguienteSignificado(itDiccNegocios)
+    tuplaDelActual ← Proximo(tuplaNegocio.regalosPorPrecio)         //O(1)
+    Desencolar(tuplaNegocio.regalosPorPrecio)         //O(Log R) con R siendo los regalos del negocio en particular
+    Encolar(c.masBaratosPorNegocio, Proximo(tuplaNegocio.regalosPorPrecio)) //O(log N) con N cantidad de negocios
+    itConjNegConRegalos ← tuplaNegocio.negocioConRegalos   //O(1)
+    if(HayAnterior(itConjNegConRegalos) == false ∧ HaySiguiente(itConjNegConRegalos) == false) then   //O(1)
         itConjNegConRegalos ← tuplaRegalo.negocio                               //O(1)
         EliminarSiguiente(itConjNegConRegalos)                                  //O(1)
     endif
+    EliminarSiguiente(tuplaDelActual.regalo)   //O(1)
+
