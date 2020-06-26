@@ -1,7 +1,0 @@
-/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion-trie/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion-trie/cmake-build-debug/CMakeFiles/correrValgrind.dir
-/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion-trie/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion-trie/cmake-build-debug/CMakeFiles/gtest.dir
-/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion-trie/cmake-build-debug/CMakeFiles/correrTests.dir
-/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion-trie/cmake-build-debug/CMakeFiles/gtest_main.dir
-/home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion-trie/cmake-build-debug/CMakeFiles/correrTests_ext.dir
