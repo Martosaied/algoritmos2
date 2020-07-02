@@ -1,0 +1,31 @@
+-- Ejercicio 1 --
+Se tiene un arreglo de n n´umeros naturales que se quiere ordenar por frecuencia, y en caso de igual frecuencia,
+por su valor. Por ejemplo, a partir del arreglo [1, 3, 1, 7, 2, 7, 1, 7, 3] se quiere obtener [1, 1, 1, 7, 7, 7, 3, 3, 2].
+Describa un algoritmo que realice el ordenamiento descrito, utilizando las estructuras de datos intermedias que
+considere necesarias. Calcule el orden de complejidad temporal del algoritmo propuesto.
+
+Primero recorremos el array e insertamos en un diccionario logaritmico nuestros numeros como clave y un contador de apariciones como significado
+Luego recorremos dicho diccionario e insertamos cada part clave-significado en un heap ordenado por la cantidad de apariciones
+para luego desencolar todo e insertar en un array por cantidad nlogn
+
+-- Ejercicio 2 --
+
+--Recorremos el array por cada numero, lo insertamos en nuestro array de 20 posiciones o en una de las listas de excepciones
+Hacemos counting sort con el array del 20 al 40
+Hacemos insertion sort (n^2) en los otros array que al ser a lo sumo del tamaño raiz de n, tenemos n como complejidad final
+
+-- Ejercicio 3 --
+Recorriendo la N claves, Insertamos las N claves en un trie, O(N*L)
+Haciendo pre order insertamos en un array en orden en O(N*L)
+Pqrque? hacer un inoder/preorder/postorder pertenece a O(cantidad de nodos)
+y la cantidad de nodos en un trie esta acotada superiormente por O(N*L) con L el largo maximo de las palabras
+Una vez hecho dicho array lo ordenamos con un merge sort en nlogn, usando como clave de comparacion la numerica de la tupla
+
+-- Ejercicio 3b --
+Idem  y al final en vez de merge sort hacemos counting sort lo que me dejaria una complejidad final = O(N*L+N+K) donde K es el rango que es el rango de los numeros negativos
+Lo cual pertenece a O(N*L)
+
+-- Ejercicio 4 --
+
+-- Ejercicio 5 --
+1. Counting sort con k = n, la complejidad quedaria O(n+n) = O(n)

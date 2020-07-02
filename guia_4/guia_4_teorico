@@ -1,0 +1,8 @@
+1) Arreglos ordenados para todos, Insertion Sort, Selection Sort y Quick Sort
+2)  Heapsort queda igual pq usando el algoritmo naive para convertir un array a un heap es nlogn osea te queda nlogn + nlogn
+    Mergesort para mi cambia pq a la hora de pararte en n/2 tenes que recorrer el array
+    Quicksort si tu pivot es el primero no cambia
+3) Esa cota es para algoritmos de comparacion y counting/radix no son algoritmos de comparacion
+4) Quicksort, Heapsort, Insertion sort y Selection Sort
+5) Heapsort es inestable, el algoritmo de floyd te deja valores iguales a izquierda o a derecha de otro valor igual indistintamente. entonces no hay forma de asegurarte del orden (sin hacer hacks) (o cambiar la relacin de orden) entre dos elementos iguales
+

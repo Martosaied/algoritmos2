@@ -2,7 +2,7 @@
 #include "string_map.h"
 
 template<class T>
-string_map<T>::Nodo::Nodo(): siguientes(256) {}
+string_map<T>::Nodo::Nodo(): siguientes(256), definicion(NULL) {}
 
 template <typename T>
 string_map<T>::string_map(): raiz(), _size() {
@@ -15,13 +15,30 @@ string_map<T>::string_map(const string_map<T>& aCopiar) : string_map() { *this =
 
 template <typename T>
 string_map<T>& string_map<T>::operator=(const string_map<T>& d) {
-    // COMPLETAR
+    raiz = _copy(d.raiz);
+}
+
+template <typename T>
+typename string_map<T>::Nodo* string_map<T>::_copy(Nodo* nodeToCopy) {
+
 }
 
 template <typename T>
 string_map<T>::~string_map(){
-    // COMPLETAR
+    _vaciar(raiz);
+    raiz = nullptr;
 }
+
+template<class T>
+void string_map<T>::_vaciar(string_map::Nodo *node) {
+    if (node != nullptr) {
+        for (int i = 0; i < 256; ++i) {
+            _vaciar(node->siguientes[i]);
+        }
+        delete node;
+    }
+}
+
 
 template <typename T>
 T& string_map<T>::operator[](const string& clave){
@@ -30,13 +47,29 @@ T& string_map<T>::operator[](const string& clave){
 
 
 template <typename T>
-int string_map<T>::count(const string& clave) const{
-    return 4;
+int string_map<T>::count(const string& clave) const {
+    return _count(clave, raiz) ? 1 : 0;
+}
+
+template <typename T>
+bool string_map<T>::_count(const string& clave, string_map::Nodo *actualNode) const {
+    if (clave == "") {
+        return actualNode->definicion != NULL;
+    }
+
+    int firstChar = int(clave[0]);
+    if (actualNode->siguientes[firstChar] == nullptr) {
+        Nodo* newNode = new Nodo();
+        actualNode->siguientes[firstChar] = newNode;
+    }
+    string claveNoConstante = clave;
+    claveNoConstante.erase(0, 1);
+    return _count(claveNoConstante, actualNode->siguientes[firstChar]);
 }
 
 template <typename T>
 const T& string_map<T>::at(const string& clave) const {
-    // COMPLETAR
+    return _at(clave, raiz);
 }
 
 template <typename T>
@@ -46,7 +79,28 @@ T& string_map<T>::at(const string& clave) {
 
 template <typename T>
 void string_map<T>::erase(const string& clave) {
-    // COMPLETAR
+    int i = 0;
+    Nodo* lastNodeDef = new Nodo();
+    int lastIndex = 0;
+    Nodo* actualNode = raiz;
+    while (i < clave.size()) {
+        actualNode = actualNode->siguientes[int(clave[i])];
+        if (i + 1 == clave.size()) {
+            actualNode->definicion = NULL;
+        }
+        int cantHijos = 0;
+        for (int j = 0; j < 256; ++j) {
+            if (actualNode->siguientes[j] != NULL) {
+                cantHijos++;
+            }
+        }
+        if (cantHijos > 2 || actualNode->definicion != NULL) {
+            lastNodeDef = actualNode->siguientes[int(clave[i])];
+            lastIndex = int(clave[i+1]);
+        }
+        i++;
+    }
+    _vaciar(lastNodeDef->siguientes[lastIndex]);
 }
 
 template <typename T>
@@ -62,7 +116,7 @@ bool string_map<T>::empty() const{
 template<typename T>
 void string_map<T>::_insert(const pair<string, T>& data, string_map::Nodo* actualNode) {
     if (data.first == "") {
-        actualNode->definicion = *data.second;
+        actualNode->definicion = new T(data.second);
         _size++;
         return;
     }
@@ -86,7 +140,7 @@ void string_map<T>::insert(const pair<string, T>& data) {
 template<typename T>
 T& string_map<T>::_at(string clave, string_map::Nodo *actualNode) {
     if (clave == "") {
-        return actualNode->definicion;
+        return *actualNode->definicion;
     }
 
     int firstChar = int(clave[0]);
@@ -95,5 +149,5 @@ T& string_map<T>::_at(string clave, string_map::Nodo *actualNode) {
         actualNode->siguientes[firstChar] = newNode;
     }
     clave.erase(0, 1);
-    _at(clave, actualNode->siguientes[firstChar]);
+    return _at(clave, actualNode->siguientes[firstChar]);
 }

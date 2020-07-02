@@ -90,7 +90,10 @@ private:
     int _size;
 
     void _insert(const pair<string, T>& data, Nodo* actualNode);
+    Nodo* _copy(Nodo* nodeToCopy);
     T& _at(string clave, Nodo* actualNode);
+    bool _count(const string& clave, Nodo* actualNode) const;
+    void _vaciar(string_map::Nodo* node);
 };
 
 #include "string_map.hpp"

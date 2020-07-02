@@ -1,0 +1,20 @@
+-- Ejercicio 1 --
+Selection Sort  : O(n²), para todos los casos
+Insertion Sort  : O(n^2), es el peor caso donde siempre va a la posicion N en busca del minimo/maximo
+Merge Sort      : O(n log n)
+Heap Sort       : O(n log n)
+Quick Sort      : Depende de la eleccion del pivot, mientras no sea el primero/ultimo, sera nlogn
+
+-- Ejercicio 2 --
+Insertion Sort, para aprovechar el O(N) en caso de que este ordenado
+
+-- Ejercicio 3 --
+Selection Sort
+
+-- Ejercicio 4 --
+Uso el algoritmo de merge para mergear dos listas ordenadas, el mismo que se usa en el Merge Sort. Generalizado para N indices
+
+-- Ejercicio 5 --
+∈ Guia 4
+
+-- 
