@@ -20,7 +20,15 @@ string_map<T>& string_map<T>::operator=(const string_map<T>& d) {
 
 template <typename T>
 typename string_map<T>::Nodo* string_map<T>::_copy(Nodo* nodeToCopy) {
-
+    if (nodeToCopy == nullptr) {
+        return NULL;
+    }
+    Nodo* treeNew = new Nodo();
+    treeNew->definicion = nodeToCopy->definicion;
+    for (int i = 0; i < 256; ++i) {
+        treeNew->siguientes[i] = _copy(nodeToCopy->siguientes[i]);
+    }
+    return treeNew;
 }
 
 template <typename T>
