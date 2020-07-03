@@ -1,4 +1,4 @@
-/home/martin/Downloads/CLion-2020.1.2/clion-2020.1.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion-trie/ejercitacion-trie
+/home/martin/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/201.7223.86/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion-trie/ejercitacion-trie
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/martin/Documents/facultad/algoritmos_2/git/talleres/ejercitacion-trie/ejercitacion-trie/cmake-build-debug
