@@ -1,0 +1,16 @@
+-- Ejercicio 1 --
+int sumaLog (vector v) {
+    if (v.size() == 1) {
+        return v[0]
+    }
+
+    return sumaLog([1...v.size()/2)) + sumaLog([v.size()/2...v.size()))
+}
+
+bool masIzquierdo(vector v) {
+    if (v.size() == 2) {
+        return v[0] > v[1]
+    }
+
+    return masIzquierdo([1...v.size()/2)) && masIzquierdo([v.size()/2...v.size()))
+}
