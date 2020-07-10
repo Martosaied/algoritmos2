@@ -17,4 +17,44 @@ Uso el algoritmo de merge para mergear dos listas ordenadas, el mismo que se usa
 -- Ejercicio 5 --
 ∈ Guia 4
 
--- 
+-- Ejercicio 6 --
+
+-- Ejercicio 7 --
+recorreria el arreglo e insertaria cada numero en el AVL, esto daria O(N log N). Luego utilizando un algoritmo de inorder convertiria
+nuestro AVL en un array.
+
+-- Ejercicio 8 --
+Utilizando el AVL Sort ideado en el ejercicio anterior pero utilizando el AVL como diccionario logaritmico. Donde insertaria en dicho diccionario y me 
+quedaria con el iterador. Luego a partir de ese iterador preguto si el numero siguiente es o jno el mismo. Si no es el mismo puedo insertarlo en O(1)
+Sino se donde sumar 1 al significado que es igual a la cantidad de repeticiones. luego recorro el arreglo B e inserto en log N cada elemento y lo sumo.
+Por ultimo tengo un AVL de n' + m nodos y haria un inorder del mismo.
+
+Bucket sort, por cada elemento de A creo un bucket, y luego recorro B y los agrego a cada bucket creado. Para dsp ordenar los buckets(o numeros, si es copunting sort)
+en nlogn con algun algoritmos conocido.
+
+-- Ejercicio 9 --
+20 buckets, todas las combinaciones entre Nota y Sexo, orden de los buckets conocido. Solo es cuestion de ubicar.
+
+-- Ejercicio 10 --
+?????
+
+-- Ejercicio 11 --
+Counting Sort???
+
+-- Ejercicio 12 --
+∈ Guia 4
+
+-- Ejercicio 13 --
+∈ Guia 4
+
+-- Ejercicio 14 --
+
+-- Ejercicio 15 --
+
+-- Ejercicio 16 --
+
+-- Ejercicio 17
+∈ Guia 4(pendiente)
+
+-- Ejercicio 18 --
+∈ Guia 4
