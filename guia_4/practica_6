@@ -1,0 +1,40 @@
+-- Ejercicio 4 --
+T(n) = T(n − 2) + 5 --> O(N)
+T(n) = T(n − 1) + n --> O(N^2)
+T(n) = T(n − 1) + √n --> O(N)
+T(n) = T(n − 1) + n² --> O(N^3)
+T(n) = 2T(n − 1) --> O(2^N)
+T(n) = T(n/2) + n --> O(N)
+T(n) = T(n/2) + √n --> O(√n)
+T(n) = T(n/2) + n² --> O(N²)
+T(n) = 2T(n − 4) --> O(2^(N/4)
+T(n) = 2T(n/2) + log n --> O(N)
+T(n) = 3T(n/4) --> O(n^log4(3))
+T(n) = 3T(n/4) + n --> O(n)
+
+-- Ejercicio 5 --
+sumaPotencia(matriz, n) {
+    if(n == 1){
+        return A
+    }
+    D = sumaPotencia(A, n/2)
+    AExpNSobre2 = potencia(A, n/2)
+
+    return D + AExpNSobre2 * D
+}
+
+-- Ejercicio 6 --
+procedure maxDistancia(nodo)
+    if nodo == nil then
+        return h0, 0i . O(1)
+    else
+        maxIzq, alturaIzq ← maxDistancia(nodo.izq) . O(T(I)
+        maxDer, alturaDer ← maxDistancia(nodo.der) . O(T(D)
+        return hmax(maxIzq, maxDer, alturaIzq + 1 + alturaDer), max(alturaIzq, alturaDer) + 1i . O(1)
+    end if
+end procedure
+
+-- Ejercicio 7 --
+Despues lo pensamos
+
+-- Ejercicio 8 --

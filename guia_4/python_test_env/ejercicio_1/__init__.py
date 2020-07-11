@@ -44,7 +44,4 @@ def potenciadyc(numbers):
     B = numbers[0:len(numbers)//2]
     C = numbers[len(numbers)//2:]
     return potenciadyc(B) * potenciadyc(C)
-    
-        
-        
-    
+
